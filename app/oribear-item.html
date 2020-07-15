@@ -16,6 +16,7 @@
     <!-- endbuild -->
     <!-- build:js scripts/modernizr.js -->
     <script src="scripts/modernizr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- endbuild -->
   </head>
   <body>
@@ -30,9 +31,11 @@
             <h3 class="text-muted d-none d-sm-block ml-2 mb-3">Orinoco.fr</h3>
             <ul class="nav nav-pills mx-auto mx-sm-0 ml-sm-auto mb-3">
               <li class="nav-item">
-                <a href="#" class="nav-link active">Accueil</a>
+                <a href="index.html" class="nav-link">Accueil</a>
               </li>
-              
+              <li class="nav-item">
+                <a href="#" class="nav-link active">Produit</a>
+              </li>
               <li class="nav-item">
                 <a href="oribear-basket.html" class="nav-link">Panier</a>
               </li>
@@ -43,8 +46,6 @@
           </div>
         </div> 
 
-
-        
           <div class="container-fluid" id="banner">
             <div class="row">
               <img class="col-4 pl-md-5 mt-2 mt-md-4 mb-md-4 mx-auto" src="images/Ori_logo.png" alt="logo">
@@ -54,20 +55,52 @@
         
       </header>
 
-      <!--<div class="jumbotron">
-        <h1 class="display-3">Allez Allez!</h1>
-        <p class="lead">Always try to improve</p>
-        <p><a class="btn btn-lg btn-warning" href="#">GO!</a></p>
-      </div>-->
-
-      <div id="teddies_list">
+      <div class="row marketing">
+        <div class="col-lg-6">
+          
+            <div id="teddy_view" class="card">
+            </div>
+    
+        </div>
+        <div class="col-lg-6">
+          <div id="order_settings">
+            <div id="color_infos">
+              <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  Couleurs
+                </button>
+                <div class="dropdown-menu" id="colors_list">
+                </div>
+              </div>
+              <div id="color_choice">
+                  couleur
+              </div>
+            </div>
+          <div class="quantity_infos">
+              <p class="quantity_title">Quantité</p>
+              <a href="#" id="add">+</a>
+              <a href="#" id="remove">-</a>
+              <div id="quantity_choice">                
+          </div>
+        </div>
+          </div>
+          <div class="row basket_stuff">
+            <div class="">
+              <p><a href="oribear-basket.html" class="btn btn-success" id="see_basket">Voir le panier</a></p>
+              
+            </div>
+            <div class="">
+              <p><a href="#" class="btn btn-success" id="add_basket">Ajouter au panier</a></p>
+              
+            </div>
+          
+          </div>
+        </div>
         
       </div>
 
-      
-
       <div class="footer text-center">
-        ♥
+        <p>♥</p>
       </div>
     </div>
     <!-- build:js scripts/vendor.js -->
@@ -75,9 +108,7 @@
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- endbuild -->
     <!-- build:js scripts/main.js -->
-    <script src="scripts/models/teddies-infos.js"></script>
-    <script src="scripts/main.js"></script>
+    <script src="scripts/product.js"></script>
     <!-- endbuild -->
   </body>
 </html>
- 
