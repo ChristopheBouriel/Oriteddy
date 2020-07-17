@@ -25,7 +25,7 @@ request.onreadystatechange = function() {
         let totalTeddyItems = [];
         let colorNumberTableAll = [];
         
-//récupération de la liste brute des articles du panier
+//récupération de la liste brute des articles d'un modèle du panier
         for (let idItem of idItemsTab) {
             let itemsTab = localStorage.getItem(idItem);
             
@@ -77,12 +77,15 @@ request.onreadystatechange = function() {
                             };
                              
                         }
-                    colorNumberTableAll.push(colorNumberTable);
-                }   
+                    
+                }
+                   
             console.log(colorNumberTable);
-            console.log(colorNumberTableAll);
+            
             };
-
+            colorNumberTableAll.push(colorNumberTable);
+            console.log(colorNumberTableAll);
+            
 // affichage des articles d'une certaine couleur pour chaque modèle
             for (let y of colorNumberTable) {
                     const newTeddyOrderColor = document.createElement('div');
