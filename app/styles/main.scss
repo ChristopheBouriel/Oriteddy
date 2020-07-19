@@ -6,6 +6,8 @@
   background-color: #f3e9f1; 
 }
 
+
+
 .card img {
   max-width: 80%;
   height: auto;
@@ -16,7 +18,9 @@
 .card {
   background-color: #eacdc2;
   max-width: 90%;
-  margin: auto;
+  
+  padding-top: 15px;
+  height: 100%;
 }
 
 .teddy_view_nav {
@@ -31,8 +35,9 @@
   margin-top: 10px;
 }
 
-.subtotal {
+.subtotal_item {
   color: #646464;
+  font-weight: bold;
 }
 
 #total_order p {
@@ -65,8 +70,10 @@
   height: 40px;
   border-radius: 5px;
   background-color: #85bdfa;
-  padding: 7px 15px 7px 15px;
+  padding: 0px 10px 7px 10px;
   color: white;
+  font-size: x-large;
+  text-align: center;
   margin-left: 5px;
 }
 
@@ -122,12 +129,11 @@
 
 .make_subtotal {
   font-size: 0.9rem;
-  text-align: start;
-  
+  text-align: start;  
 }
 
 p {
-  color: #a56574;
+  color: #774d57;
 }
 
 #color_choice, #quantity_choice {

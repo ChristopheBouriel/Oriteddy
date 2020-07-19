@@ -11,6 +11,12 @@ function readList(list) {
               + '<img src=' + teddy.imageUrl + '>'
                + '<p class="mt-3">' + teddy.price + ' Bath' + '</p>'
                 + '<a href="oribear-item.html?' + teddy._id + '" class="stretched-link">Cliquer pour voir plus</a>';       
+              let test =  localStorage.getItem(teddy._id);
+              console.log(test);
+                if (test === null) {
+                  localStorage.setItem(teddy._id, '');
+                  console.log('ok')
+                }
     }
 }
 

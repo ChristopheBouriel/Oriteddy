@@ -96,16 +96,11 @@ function addBasket(infos) {
             event.preventDefault();
             if (item!=0) {
                 console.log(addItems);
-
-            let constObjName = infos.name;
-            constObjName = '"name":"' + constObjName + '",';
-            let constObjColor = addItems[0];
-            constObjColor = '"color":"' +  constObjColor + '",';
+            let constObjName = '"name":"' + infos.name + '",';
+            let constObjColor = '"color":"' +  addItems[0] + '",';
             console.log(constObjColor);
-            let constObjQuty = addItems[1];
-            constObjQuty = '"nombre":' + constObjQuty + ',';
-            let constObjPrice = infos.price;
-            constObjPrice = '"price":' + constObjPrice;
+            let constObjQuty = '"nombre":' + addItems[1] + ',';
+            let constObjPrice = '"price":' + infos.price;
 
             let constObj = constObjName + constObjColor + constObjQuty + constObjPrice;
             console.log(constObj);
