@@ -17,6 +17,7 @@
     <!-- build:js scripts/modernizr.js -->
     <script src="scripts/modernizr.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://kit.fontawesome.com/d034220892.js" crossorigin="anonymous"></script>
     <!-- endbuild -->
   </head>
   <body>
@@ -28,80 +29,97 @@
         
         <div class="container-fluid">
           <div class="row">
-            <h3 class="text-muted d-none d-sm-block ml-2 mb-3">Orinoco.fr</h3>
-            <ul class="nav nav-pills mx-auto mx-sm-0 ml-sm-auto mb-3">
-              <li class="nav-item">
-                <a href="index.html" class="nav-link">Accueil</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link active">Produit</a>
-              </li>
-              <li class="nav-item">
-                <a href="oribear-basket.html" class="nav-link">Panier</a>
-              </li>
-              <li class="nav-item">
-                <a href="oribear-order.html" class="nav-link">Commande</a>
-              </li>
-            </ul>
-          </div>
-        </div> 
-
-          <div class="container-fluid" id="banner">
-            <div class="row">
-              <img class="col-4 pl-md-5 mt-2 mt-md-4 mb-md-4 mx-auto" src="images/Ori_logo.png" alt="logo">
-              <img class="col-10 mb-2 mx-auto col-md-8 pr-md-5 align-self-center" src="images/Ori_name_thin.png" alt="nom">
+            <div class="col-12 my-2">
+              <div class="row">
+                <h3 class="text-muted d-none d-sm-block ml-2 mb-3">Oriteddy.fr</h3>
+                <ul class="nav nav-pills mx-auto mx-sm-0 ml-sm-auto mb-3">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link active">Produit</a>
+                  </li>
+              
+                  <li class="nav-item">
+                    <a href="oribear-basket.html" class="nav-link"><i class="fas fa-shopping-cart"> <span id="total_articles"></span></i></a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        
-      </header>
+  
+            <div class="col-12 my-2 order-first order-md-2" id="banner">
+              <div class="row">
+                <img class="col-4 pl-md-5 mt-2 mt-md-4 mb-md-4 mx-auto" src="images/Ori_logo.png" alt="logo">
+                <h1 class="col-10 mb-2 mx-auto col-md-8 pr-md-5 text-center align-self-center">Oriteddy</h1>
+              </div>
+            </div>
+        </div>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
+        </div>
+      </header>
+    <main>
+      <div class="row no-gutters">
+        <div class="col-lg-8 mx-auto">
           
             <div id="teddy_view" class="card">
             </div>
-    
         </div>
-        <div class="col-lg-6">
-          <div id="order_settings">
-            <div id="color_infos">
-              <div class="dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                  Couleurs
-                </button>
-                <div class="dropdown-menu" id="colors_list">
+      </div>
+
+      <div class="row no-gutterss mt-2">
+        <div class="col-lg-8 mx-auto">          
+            
+              <div class="row no-gutters option_stuff">
+                <div class="col-12 col-md-6 mt-2 mt-md-4">
+                  <div id="color_infos">
+                    <div class="dropdown">
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Couleurs
+                      </button>
+                      <div class="dropdown-menu" id="colors_list">
+                      </div>
+                    </div>
+                    <div id="color_choice">
+                        
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 mt-2 mt-md-4">
+                    <div class="quantity_infos">
+                      <p class="quantity_title">Quantité</p>
+                      <a href="#" id="add">+</a>
+                      <a href="#" id="remove">-</a>
+                      <div id="quantity_choice">                
+                      </div>
+                    </div>
                 </div>
               </div>
-              <div id="color_choice">
-                  couleur
-              </div>
-            </div>
-          <div class="quantity_infos">
-              <p class="quantity_title">Quantité</p>
-              <a href="#" id="add">+</a>
-              <a href="#" id="remove">-</a>
-              <div id="quantity_choice">                
-          </div>
+           
         </div>
-          </div>
-          <div class="row basket_stuff">
-            <div class="">
+      </div>
+
+      <div class="row no-gutters ">
+        <div class="col-lg-8 mx-auto">
+          
+          <div class="row basket_stuff no-gutters">
+            <div class="col-12 text-center text-md-left col-md-6 mt-2">
               <p><a href="oribear-basket.html" class="btn btn-success" id="see_basket">Voir le panier</a></p>
               
             </div>
-            <div class="">
+            <div class="col-12 text-center text-md-right col-md-6 order-first order-md-2 text-md-right mt-2">
               <p><a href="#" class="btn btn-success" id="add_basket">Ajouter au panier</a></p>
               
             </div>
           
           </div>
         </div>
-        
-      </div>
+      </div>  
+    </main>
 
-      <div class="footer text-center">
+      <footer class="footer text-center">
         <p>♥</p>
-      </div>
+      </footer>
     </div>
     <!-- build:js scripts/vendor.js -->
     <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>

@@ -6,6 +6,7 @@ function getAllTeddiesInfos() {
 
 let idItemsTab = [];
 let totalOrder = 0;
+let totalTeddiesOrder = 0;
 let removeBasketTable = [];
 let colorNumberTableAll = [];
 let totalTeddyItems = [];
@@ -19,7 +20,8 @@ function makeIdTab(infos) {
         idItemsTab.push(idItem);
         console.log(idItemsTab);
         //remise à zero panier
-        //localStorage.setItem(idItem, '');
+        //localStorage.setItem(idItem, '');localStorage.setItem("totalArticles", '');
+
         // 
     };
     makeBasicListFromStorage(idItemsTab); 
@@ -44,7 +46,6 @@ function makeBasicListFromStorage(idItemsTab) {
     addOneItem();
     console.log(colorNumberTableAll);
 } 
-
 
 //constitution de la liste des articles sans répétition de modèles d'une même couleur (contrôle)
 function makeListByColorItem(totalTeddyList, idItem) {
@@ -94,8 +95,7 @@ function makeListByColorItem(totalTeddyList, idItem) {
     makeFinalOrder(colorNumberTable);    
 }
 
-
-// affichage des articles d'une certaine couleur pour chaque modèle
+// affichage initial des articles d'une certaine couleur pour chaque modèle
 
 function showNumberColorEach(colorNumberTable) {    
     for (let y of colorNumberTable) {
@@ -105,8 +105,10 @@ function showNumberColorEach(colorNumberTable) {
         let teddyList = document.getElementById('see_basket');
         teddyList.appendChild(newTeddyOrderColor);
         newTeddyOrderColor.innerHTML = '<div class="item_color_infos"><div id="plus_less_one_'
-        + y[2] + y[0] +'"> <div class="container"><div class="make_subtotal row no-gutters"><p class="col-4">' + y[2] + '  ' + y[0] + '</p>'
-        + '<p class="col-3">Prix : ' + y[3] + '</p>' + '<p class="col-3">Quantité : ' + y[1] + '</p>'
+        + y[2] + y[0] +'"> <div class="container"><div class="make_subtotal row no-gutters title_line"><p class="col-4">Article</p><p class="col-3">Prix</p>' 
+        + '<p class="col-3">Quantité</p><p class="col-2 text-right">Montant</p></div>'
+        + '<div class="make_subtotal row no-gutters"><p class="col-4 pr-1">' + y[2] + '  ' + y[0] + '</p>'
+        + '<p class="col-3 price">' + y[3] + '</p>' + '<p class="col-3 quantity">' + y[1] + '</p>'
         + '<p class="subtotal col-2 text-right">' + y[1]*y[3] + '</p></div></div></div>'
         
         + '<div class="modify_number_basket"><p class="remove_all"><a href="oribear-basket.html" id="del' + y[2] + y[0] + '">Enlever tout</a></p>'
@@ -118,8 +120,7 @@ function showNumberColorEach(colorNumberTable) {
 console.log(removeBasketTable);
 };
 
-
-//affichage du total pour chaque modèle et constitution du tableau pour l'envoi à l'API
+//affichage initial du total pour chaque modèle et constitution du tableau pour l'envoi à l'API
 function showNumberEach(teddyName, teddyPrice, totalTeddy) {
     if (totalTeddy != 0) {
     const newTeddyOrder = document.createElement('div');
@@ -127,7 +128,7 @@ function showNumberEach(teddyName, teddyPrice, totalTeddy) {
     newTeddyOrder.id = teddyName
     let teddiesList = document.getElementById('see_basket');
     teddiesList.appendChild(newTeddyOrder);
-    newTeddyOrder.innerHTML = '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-7">'+ teddyName + '</p><p class="col-3">Quantité : ' + totalTeddy + '</p>'
+    newTeddyOrder.innerHTML = '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-5">'+ teddyName + '</p><p class="col-5">Quantité : ' + totalTeddy + '</p>'
     + '<p class="subtotal col-2 text-right">' + totalTeddy*teddyPrice + '</p></div></div>';
 
     let totalTeddyFinal = [];
@@ -140,7 +141,6 @@ function showNumberEach(teddyName, teddyPrice, totalTeddy) {
     console.log(totalTeddyItems);    
 }
 
-
 //constitution de la liste finale avant commande
 function makeFinalOrder(colorNumberTable) {
     for (let i of colorNumberTable) {
@@ -151,15 +151,15 @@ function makeFinalOrder(colorNumberTable) {
     };        
 }
 
-
 //calcul du total de la commande (contrôle)
 function makeTotal(totalTeddyItems) {
     for (let makeTotal of totalTeddyItems) {
     totalOrder = totalOrder + makeTotal[3];
-    console.log(totalOrder)  
+    totalTeddiesOrder = totalTeddiesOrder + makeTotal[1];
+    console.log(totalTeddiesOrder);
+    console.log(totalOrder);
     }
 }
-  
 
 //création de la ligne du total de la commande
 function createTotalLign() {
@@ -171,18 +171,22 @@ function createTotalLign() {
     showTotal();
 }
 
-
 //affichage du total de la commande (vue)
 function showTotal() {
     let seeTotalOrder = document.getElementById('total_order');
     if (totalOrder != 0) {    
-    seeTotalOrder.innerHTML = '<p>Total ' + totalOrder + '</p>';
+    seeTotalOrder.innerHTML = '<p>Total de votre panier : ' + totalOrder + '</p>';
     }
     else {
     seeTotalOrder.innerHTML = '<p>Votre panier est vide</p>';
     }
-}
+    let seeTotalArticles = document.getElementById('total_articles');
+    seeTotalArticles.innerHTML = totalTeddiesOrder;
     
+    localStorage.setItem("totalArticles", totalTeddiesOrder);
+    console.log(localStorage.getItem("totalArticles"));
+
+}
 
 //suppression du modèle d'une certaine couleur à l'affichage (vue)
 function removeTeddyColorAll() {
@@ -203,7 +207,9 @@ function removeTeddyColorAll() {
                 if (listenRemoveBasket == a) {
                     totalOrder = totalOrder - modifyNumberEach[1]*modifyNumberEach[3];
                     console.log(totalOrder);
-                    let changeTotalPrice = document.getElementById('total_order');                    
+                    totalTeddiesOrder = totalTeddiesOrder - modifyNumberEach[1];
+                        console.log(totalTeddiesOrder);
+                    //let changeTotalPrice = document.getElementById('total_order');                    
                     //changeTotalPrice.innerHTML = '<p>Total ' + totalOrder + '</p>';
                     showTotal();             
                     modifyNumberEach[1] = 0;
@@ -217,9 +223,7 @@ function removeTeddyColorAll() {
                                 deleteItem.removeChild(changeTotalItem);                                
                             }
                             else {
-                                changeTotalItem.innerHTML = 
-                                '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-7">'+ modifyNumberEach[2] + '</p><p class="col-3">Quantité : ' + b[1] + '</p>'
-                                    + '<p class="subtotal col-2 text-right">' + b[1]*b[2] + '</p></div></div>';
+                                modifyLignEach(b, modifyNumberEach[2]);
                             }                           
                         }                    
                     }                
@@ -231,7 +235,6 @@ function removeTeddyColorAll() {
         })
     }
 }
-
 
 //modification du panier en cas de retour à l'accueil et aux pages produit
 function newBasket() {
@@ -253,8 +256,24 @@ function newBasket() {
             }                
         }
 }
-        
 
+//modification de la ligne concernée par ajout ou suppression
+function modifyLignColorEach(readColorNumberEach, listenBasket) {
+    const rewriteOne = document.getElementById ('plus_less_one_' + listenBasket);
+    rewriteOne.innerHTML = '<div class="item_color_infos"><div id="plus_less_one_' + readColorNumberEach[2] + readColorNumberEach[0] +'"><div class="container"><div class="make_subtotal row no-gutters title_line"><p class="col-4">Article</p><p class="col-3">Prix</p>' 
+    + '<p class="col-3">Quantité</p><p class="col-2 text-right">Montant</p></div><div class="make_subtotal row no-gutters"><p class="col-4 pr-1">' + readColorNumberEach[2] + '  ' + readColorNumberEach[0] + '</p>'
+                        + '<p class="col-3">' + readColorNumberEach[3] + '</p><p class="col-3">' + readColorNumberEach[1]
+                         + '</p><p class="subtotal col-2 text-right">' + readColorNumberEach[1]*readColorNumberEach[3] + '</p></div></div></div>';
+}
+
+//modification du sous-total concerné par ajout ou suppression
+function modifyLignEach(newTotalTeddy, teddyName) {
+    const changeSubtotal = document.getElementById (teddyName);
+    changeSubtotal.innerHTML = '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-5">'+ newTotalTeddy[0] + '</p><p class="col-5">Quantité : ' + newTotalTeddy[1] + '</p>'
+                                + '<p class="subtotal col-2 text-right">' + newTotalTeddy[1]*newTotalTeddy[2] + '</p></div></div>';
+}
+
+//détection et traitement du clic sur un bouton -
 function removeOneItem() {
     for (let listenRemoveBasket of removeBasketTable) {            
         const removeOne = document.getElementById ('remove' + listenRemoveBasket);        
@@ -268,25 +287,18 @@ function removeOneItem() {
                     console.log(readColorNumberEach);                    
                     if (readColorNumberEach[2]+readColorNumberEach[0] == listenRemoveBasket && i == 1 && readColorNumberEach[1] != 0 ) {
                         readColorNumberEach[1] = readColorNumberEach[1] - 1;
-                        const removeOne = document.getElementById ('plus_less_one_' + listenRemoveBasket);
-                        removeOne.innerHTML = '<div class="item_color_infos"><div id="plus_less_one_' + readColorNumberEach[2] + readColorNumberEach[0] +'"><div class="container"><div class="make_subtotal row no-gutters"><p class="col-4">' + readColorNumberEach[2] + '  ' + readColorNumberEach[0] + '</p>'
-                        + '<p class="col-3">Prix : ' + readColorNumberEach[3] + '</p><p class="col-3">Quantité : ' + readColorNumberEach[1]
-                         + '</p><p class="subtotal col-2 text-right">' + readColorNumberEach[1]*readColorNumberEach[3] + '</p></div></div></div>';
-                        
+                        modifyLignColorEach(readColorNumberEach, listenRemoveBasket);
                         i--;
                         for (let newTotalTeddy of totalTeddyItems) {
                             if (newTotalTeddy[0] == readColorNumberEach[2]) {
                                 newTotalTeddy[1] = newTotalTeddy[1] - 1;
                                 newTotalTeddy[3] = newTotalTeddy[1]*newTotalTeddy[2];
-                                const changeSubtotal = document.getElementById (readColorNumberEach[2]);
-                                changeSubtotal.innerHTML =
-                                '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-7">'+ newTotalTeddy[0] + '</p><p class="col-3">Quantité : ' + newTotalTeddy[1] + '</p>'
-                                + '<p class="subtotal col-2 text-right">' + newTotalTeddy[1]*newTotalTeddy[2] + '</p></div></div>';
+                                modifyLignEach(newTotalTeddy, readColorNumberEach[2]);                                
                             }
                         }
                         totalOrder = totalOrder - readColorNumberEach[3];
-                        //let changeTotalPrice = document.getElementById('total_order');                    
-                        //changeTotalPrice.innerHTML = '<p>Total ' + totalOrder + '</p>';
+                        totalTeddiesOrder = totalTeddiesOrder - 1;
+                        console.log(totalTeddiesOrder);
                         showTotal();
                     }
                     console.log(totalTeddyItems);
@@ -298,6 +310,7 @@ function removeOneItem() {
     }
 }
 
+//détection et traitement du clic sur un bouton +
 function addOneItem() {
     for (let listenRemoveBasket of removeBasketTable) {                    
         const removeOne = document.getElementById ('add' + listenRemoveBasket);        
@@ -311,25 +324,20 @@ function addOneItem() {
                     console.log(readColorNumberEach);                    
                     if (readColorNumberEach[2]+readColorNumberEach[0] == listenRemoveBasket && i == 1) {
                         readColorNumberEach[1] = readColorNumberEach[1] + 1;
-                        const removeOne = document.getElementById ('plus_less_one_' + listenRemoveBasket);
-                        removeOne.innerHTML = '<div class="item_color_infos"><div id="plus_less_one_' + readColorNumberEach[2] + readColorNumberEach[0] +'"><div class="container"><div class="make_subtotal row no-gutters"><p class="col-4">' + readColorNumberEach[2] + '  ' + readColorNumberEach[0] + '</p>'
-                        + '<p class="col-3">Prix : ' + readColorNumberEach[3] + '</p><p class="col-3">Quantité : ' + readColorNumberEach[1]
-                         + '</p><p class="subtotal col-2 text-right">' + readColorNumberEach[1]*readColorNumberEach[3] + '</p></div></div></div>';
-                        
+                        modifyLignColorEach(readColorNumberEach, listenRemoveBasket);
                         i--;
                         for (let newTotalTeddy of totalTeddyItems) {
                             if (newTotalTeddy[0] == readColorNumberEach[2]) {
                                 newTotalTeddy[1] = newTotalTeddy[1] + 1;
                                 newTotalTeddy[3] = newTotalTeddy[1]*newTotalTeddy[2];
-                                const changeSubtotal = document.getElementById (readColorNumberEach[2]);
-                                changeSubtotal.innerHTML = '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-7">'+ newTotalTeddy[0] + '</p><p class="col-3">Quantité : ' + newTotalTeddy[1] + '</p>'
-                                + '<p class="subtotal col-2 text-right">' + newTotalTeddy[1]*newTotalTeddy[2] + '</p></div></div>';
+                                modifyLignEach(newTotalTeddy, readColorNumberEach[2]);
                             }
                         }
                         totalOrder = totalOrder + readColorNumberEach[3];
-                        //let changeTotalPrice = document.getElementById('total_order');                    
-                        //changeTotalPrice.innerHTML = '<p>Total ' + totalOrder + '</p>';
+                        totalTeddiesOrder = totalTeddiesOrder + 1;
+                        console.log(totalTeddiesOrder);
                         showTotal();
+                        
                     }
                     console.log(totalTeddyItems);
                     console.log(finalOrder);

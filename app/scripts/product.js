@@ -11,7 +11,7 @@ let addItems = {};
 let item = 0;
 function getOneTeddyInfos (infosTeddy) {    
     const teddyView = document.createElement('div');
-    teddyView.classList.add('teddy_item_view', 'text-center', 'my-5');
+    teddyView.classList.add('teddy_item_view', 'text-center', 'my-md-5');
     let teddyInfos = document.getElementById('teddy_view');
     teddyInfos.appendChild(teddyView);
     teddyView.innerHTML = '<p class="font-weight-bold mt-3">' + infosTeddy.name + '</p>'
@@ -81,7 +81,7 @@ function removeOne() {
         if (item>0) {
             item--;           
             console.log(item);
-            var showQuantity = document.getElementById('quantity_choice');
+            let showQuantity = document.getElementById('quantity_choice');
             showQuantity.innerHTML = item;
             addItems[1] = item;
             }
@@ -96,43 +96,29 @@ function addBasket(infos) {
             event.preventDefault();
             if (item!=0) {
                 console.log(addItems);
-            let constObjName = '"name":"' + infos.name + '",';
-            let constObjColor = '"color":"' +  addItems[0] + '",';
-            console.log(constObjColor);
-            let constObjQuty = '"nombre":' + addItems[1] + ',';
-            let constObjPrice = '"price":' + infos.price;
-
-            let constObj = constObjName + constObjColor + constObjQuty + constObjPrice;
-            console.log(constObj);
-
-            var grr = localStorage.getItem(idItem);
-            var grrrr = '{' + constObj +'},';
-            grr = grrrr + grr;
-            localStorage.setItem(idItem, grr);
-            console.log(localStorage.getItem(idItem));
-            addItems = [];
-            item = 0;
+                let constObjName = '"name":"' + infos.name + '",';
+                let constObjColor = '"color":"' +  addItems[0] + '",';
+                console.log(constObjColor);
+                let constObjQuty = '"nombre":' + addItems[1] + ',';
+                let constObjPrice = '"price":' + infos.price;
+                let constObj = constObjName + constObjColor + constObjQuty + constObjPrice;
+                console.log(constObj);
+                let grr = localStorage.getItem(idItem);            
+                grr = '{' + constObj +'},' + grr;
+                localStorage.setItem(idItem, grr);
+                console.log(localStorage.getItem(idItem));
+                addItems = [];
+                item = 0;
             }
         });
 }
-
-//aller au panier
-function seeBasket() {
-    const seeBasket = document.getElementById('see_basket');
-        seeBasket.addEventListener('click', function() {
-            
-            //enlever la virgule
-
-        console.log(idItemsTab);
-        });
-}
-
-
 
 let model = window.location.search;
 let idItem = model.substring(1);
 let urlApiTeddy = 'http://localhost:3000/api/teddies/' + idItem;
 console.log (urlApiTeddy);
+let seeTotalArticles = document.getElementById('total_articles');
+seeTotalArticles.innerHTML = localStorage.getItem("totalArticles"); 
 getTeddyInfos();
 addOne();
 removeOne();

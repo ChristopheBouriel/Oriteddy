@@ -3,13 +3,43 @@
 }*/
 
 #banner {
-  background-color: #f3e9f1; 
+  background-color: #f3e9f1;
+  border-radius: 5px;
+  border: solid 1px #dabdc4;
 }
 
+.nav-link {
+  text-align: center;
+  font-weight: bold;
+  border: solid 1px;
+  margin: 2px;  
+}
 
+.nav-item {
+  width: 33%;
+}
+
+.nav {
+  width: 50%;
+}
+
+.active {
+  border: solid 1px #007bff;
+}
+
+i {
+  font-size: 1.2rem;
+}
+
+#total_articles {
+    padding: 5px;
+    margin-top: 0px;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
 
 .card img {
-  max-width: 80%;
+  max-width: 90%;
   height: auto;
   border: solid 2px #ca7c59;
   margin: auto;
@@ -17,21 +47,29 @@
 
 .card {
   background-color: #eacdc2;
-  max-width: 90%;
-  
-  padding-top: 15px;
+  max-width: 95%;  
+  padding: 2% 2% 0% 2%;
   height: 100%;
+  margin: 5px auto 5px auto;
+}
+
+.choice_setting {
+  background-color: #a58a80;
+  max-width: 95%;  
+  padding: 0% 0% 2% 0%;
+  height: 100%;
+  border-radius: 5px;
+  border: solid 1px #dabdc4;
+  margin: auto;
 }
 
 .teddy_view_nav {
-  display: flex;
- 
+  display: flex; 
   align-self: center;
   margin-top: 10px;
 }
 
-.basket_stuff {
-  
+.basket_stuff {  
   margin-top: 10px;
 }
 
@@ -46,23 +84,24 @@
   font-weight: bold;
 }
 
-#color_infos, #quantity_infos, #order_settings {
+#color_infos {
   display: flex;
-  align-items: center
+  justify-content: flex-start;
+  
 }
 
-#order_settings {
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-  max-width: 90%;
-  margin: 10px auto 10px auto;
+.option_stuff {
+  max-width: 95%;  
+  margin: auto;
+}
+
+.basket_stuff .btn {
+  width: 242px;
 }
 
 .quantity_infos {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: flex-end; 
 }
 
 .quantity_infos a {
@@ -79,58 +118,74 @@
 
 .quantity_title {
   background-color: #007bff;
-  width: 100px;
+  width: 107px;
   height: 40px;
   color:white;
   border-radius: 5px;
   padding: 7px 20px 7px 20px;
   margin-bottom: 0px;
+  font-size: 1em;
 }
 
 .basket_stuff {
-  max-width: 90%;
-  display: flex;
-  justify-content: space-between;
+  max-width: 95%;  
   margin: auto;
 }
 
-.remove_all a {
+
+
+.remove_all {
   background-color: #007bff;
   width: 140px;
   height: 40px;
-  color:white;
+  text-align: center;
+  font-size: 1rem;
   border-radius: 5px;
   padding: 9px 20px 9px 20px;
-  margin-bottom: 0px;
+  
+  a {
+    color:white;
+  }
 }
 
 .modify_number_basket {
   display: flex;
   justify-content: start;
   align-items: center;
+  padding-left: 10px;
+ 
 }
 
 .teddy_item_order_color {
-  margin: 5px;
+  margin: 0px 5px 5px 5px;
   background-color: #ffffff;
-  padding: 5px 10px 0px 10px;
+  padding: 5px 10px 0px 0px;
 }
 
 .teddy_item_order {
-  margin: 5px;
+  margin: 0px 5px 5px 5px;
   background-color: #f3e9f1;
-  padding: 5px 10px 0px 10px;
+  padding: 5px 10px 0px 0px;
   margin-bottom: 15px;
 }
 
 .subtotal_item p {
-  color : rgb(73, 70, 70);
+  color : #494646;
+  font-size: 0.8rem;
 }
 
 .make_subtotal {
-  font-size: 0.9rem;
-  text-align: start;  
+  font-size: 0.8rem;
+  text-align: start;
+  
 }
+
+.title_line p {
+    margin-bottom: 0px;
+    color: black;
+    font-weight: 400;
+  }  
+
 
 p {
   color: #774d57;
@@ -139,6 +194,7 @@ p {
 #color_choice, #quantity_choice {
   text-align: center;
   border: solid 1px #007bff;
+  background-color: white;
   color: grey;
   height: 40px;
   margin-left: 5px;
@@ -147,9 +203,9 @@ p {
 #color_choice {
   display: flex;
   align-items: center;
-  width: 100px;
-  text-align: start;
-  padding-left: 5px;
+  width: 130px;
+  justify-content: center;
+  
   border-radius: 5px;
 }
 
@@ -161,19 +217,6 @@ p {
   border-radius: 5px;
 }
 
-/*
-header {
-  display: flex;
-  flex-direction: column;
-}*/
-
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
 /* Space out content a bit */
 body {
   padding-top: 1.5rem;
@@ -181,76 +224,75 @@ body {
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-right: 1rem;
-  padding-left: 1rem;
-}
+
 
 /* Custom page header */
 .header {
   padding-bottom: 1rem;
-  border-bottom: .05rem solid #ff9f10;
-}
-
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 3rem;
+  border-bottom: 2px solid #7810ff;
+  margin-bottom: 2rem;
+  max-width: 95%;
+  margin: 0rem auto 1rem auto;
 }
 
 /* Custom page footer */
 .footer {
   padding-top: 1.5rem;
   color: rgb(253, 232, 37);
-  border-top: .05rem solid #e5e5e5;
+  border-top: .1rem solid #e5e5e5;
 }
 
-/* Customize container */
-@media (min-width: 48em) {
-  .container {
-    max-width: 46rem;
+h1 { 
+  font-family: 'Belligerent-Madness';
+  font-size: 7rem;
+}  
+
+@media (max-width: 576px) {
+  p {
+    font-size: 0.7em;
   }
-}
-.container-narrow > hr {
-  margin: 2rem 0;
+  
+  h1 {
+    font-size: 3.4rem;
+  }
+  .nav {
+    width: 100%;
+  }
+  .nav-item {
+    width: 100%;
+  }
+  .nav-link {
+    font-size: 0.8em;
+    height: auto;
+   
+    text-align: center;  
+  }
+  .quantity_infos, #color_infos {    
+    justify-content: center;
+  }
+   
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: .05rem solid #ecb4b4;
-}
-.jumbotron .btn {
-  padding: .75rem 1.5rem;
-  font-size: 1.5rem;
+@media (min-width: 576.02px) {
+  .teddy_item_order_color {
+    margin: 0px 15px 5px 15px;  
+    padding: 5px 10px 0px 0px;
+  }
+
+  .teddy_item_order {
+    margin: 0px 15px 25px 15px;  
+    padding: 5px 10px 0px 0px;    
+  }
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 3rem 0;
-}
-.marketing p + h4 {
-  margin-top: 1.5rem;
-}
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 48em) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 2rem;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+
+@font-face {
+  font-family: 'Belligerent-Madness';
+  src:url('../Fonts/Belligerent-Madness.ttf.woff') format('woff'),
+      url('../Fonts/Belligerent-Madness.ttf.svg#Belligerent-Madness') format('svg'),
+      url('../Fonts/Belligerent-Madness.ttf.eot'),
+      url('../Fonts/Belligerent-Madness.ttf.eot?#iefix') format('embedded-opentype'); 
+  font-weight: normal;
+  font-style: normal;
 }
