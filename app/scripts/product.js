@@ -11,7 +11,7 @@ let addItems = {};
 let item = 0;
 function getOneTeddyInfos (infosTeddy) {    
     const teddyView = document.createElement('div');
-    teddyView.classList.add('teddy_item_view', 'text-center', 'my-md-5');
+    teddyView.classList.add('teddy_item_view', 'text-center', 'mt-md-5');
     let teddyInfos = document.getElementById('teddy_view');
     teddyInfos.appendChild(teddyView);
     teddyView.innerHTML = '<p class="font-weight-bold mt-3">' + infosTeddy.name + '</p>'
@@ -22,7 +22,7 @@ function getOneTeddyInfos (infosTeddy) {
     teddyViewNav.classList.add('teddy_view_nav');
     let teddyNavButtons = document.getElementById('teddy_view');
     teddyNavButtons.appendChild(teddyViewNav);
-    teddyViewNav.innerHTML = '<p><a href="index.html#' + infosTeddy.name + '" class="btn btn-success">Retour à l\'accueil</a></p>';
+    teddyViewNav.innerHTML = '<p><a href="index.html#' + infosTeddy.name + '"><div class="back_to_list"><i class="fas fa-paw"></i><p>Retour</p></div></a></p>';
 
     let initColor = document.getElementById('color_choice');
     initColor.innerHTML = infosTeddy.colors[0];
@@ -107,18 +107,30 @@ function addBasket(infos) {
                 grr = '{' + constObj +'},' + grr;
                 localStorage.setItem(idItem, grr);
                 console.log(localStorage.getItem(idItem));
-                addItems = [];
-                item = 0;
+                
             }
+            let allArticles = localStorage.getItem("totalArticles");
+            allArticles = parseFloat(allArticles);
+            let adds = addItems[1];            
+            allArticles = allArticles + adds;            
+            localStorage.setItem("totalArticles", allArticles);
+            showTotalArticles();
+            addItems = [];
+            let showQuantity = document.getElementById('quantity_choice');
+            showQuantity.innerHTML = 0;
         });
-}
+};
+
+function showTotalArticles() {
+    let totalArticles = document.getElementById('total_articles');
+    totalArticles.innerHTML = localStorage.getItem("totalArticles");
+};
 
 let model = window.location.search;
 let idItem = model.substring(1);
 let urlApiTeddy = 'http://localhost:3000/api/teddies/' + idItem;
 console.log (urlApiTeddy);
-let seeTotalArticles = document.getElementById('total_articles');
-seeTotalArticles.innerHTML = localStorage.getItem("totalArticles"); 
+showTotalArticles();
 getTeddyInfos();
 addOne();
 removeOne();

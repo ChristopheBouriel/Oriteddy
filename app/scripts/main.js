@@ -1,4 +1,23 @@
 
+  function showTotalArticles() {
+    let totalArticles = document.getElementById('total_articles');
+    let checkBasket = localStorage.getItem("totalArticles");
+    checkBasket = parseFloat(checkBasket);
+    console.log(checkBasket);
+    if(checkBasket != 0) {
+      totalArticles.innerHTML = localStorage.getItem("totalArticles");
+      console.log('zut');
+    }
+    else {
+      let totalArticles = document.getElementById('total_articles');
+      totalArticles.innerHTML = '';
+      console.log('put');
+    }
+  }
+  
+  
+  
+
 
 function readList(list) {
     for (let teddy of list) {
@@ -17,11 +36,16 @@ function readList(list) {
                   localStorage.setItem(teddy._id, '');
                   console.log('ok')
                 }
-                
+              }
+              let seeTotalArticles = localStorage.getItem("totalArticles");
+    console.log(seeTotalArticles);
+    if (seeTotalArticles === null) {
+      localStorage.setItem("totalArticles", '');
+      console.log('raz')  
     }
     
-    let seeTotalArticles = document.getElementById('total_articles');
-    seeTotalArticles.innerHTML = localStorage.getItem("totalArticles");           
+       
+        
 }
 
 
@@ -29,10 +53,11 @@ function getAllTeddiesInfos() {
   return fetch('http://localhost:3000/api/teddies').then(response => response.json()).then(json => {readList(json);});  
 }
 
+showTotalArticles();
+getAllTeddiesInfos();
 
-let shit = getAllTeddiesInfos();
 
-//localStorage.setItem("totalArticles", '');
+
 
 
 

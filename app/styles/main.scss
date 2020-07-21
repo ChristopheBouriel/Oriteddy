@@ -53,15 +53,39 @@ i {
   margin: 5px auto 5px auto;
 }
 
-.choice_setting {
-  background-color: #a58a80;
+.bottom_panel {
+  background-color: #c3a3a3;
   max-width: 95%;  
-  padding: 0% 0% 2% 0%;
   height: 100%;
   border-radius: 5px;
   border: solid 1px #dabdc4;
-  margin: auto;
+  margin: 20px auto 0px auto;
 }
+
+.command {
+  background-color: #5546ff;
+  color: white;
+}
+
+.fa-paw {
+  border: solid 2px;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 3rem;
+  color: #5546ff;
+  background-color: white;
+}
+
+.back_to_list {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  p {
+    color: #5546ff;
+    font-weight: bold;
+  }
+}
+
 
 .teddy_view_nav {
   display: flex; 
@@ -132,8 +156,6 @@ i {
   margin: auto;
 }
 
-
-
 .remove_all {
   background-color: #007bff;
   width: 140px;
@@ -170,7 +192,7 @@ i {
 }
 
 .subtotal_item p {
-  color : #494646;
+  color : #494647;
   font-size: 0.8rem;
 }
 
@@ -217,10 +239,31 @@ p {
   border-radius: 5px;
 }
 
+.form-group {
+  padding: 0px 10px 0px 10px;
+}
+
+.order_infos {
+  p {
+    text-align: center;
+    font-size: 1.2rem;
+    border-bottom: solid 1px;
+    padding-bottom: 10px;
+  }
+  background-color: #c3a3a3;
+}
+
+#validate_order {
+  text-align: center;
+}
+
+
 /* Space out content a bit */
 body {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+  max-width: 990px;
+  margin: auto;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -270,7 +313,11 @@ h1 {
   .quantity_infos, #color_infos {    
     justify-content: center;
   }
-   
+  .subtotal_item p, .subtotal_item a {
+    font-size: 0.55rem;
+    
+  }
+  
 }
 
 @media (min-width: 576.02px) {
