@@ -5,14 +5,15 @@
 #banner {
   background-color: #f3e9f1;
   border-radius: 5px;
-  border: solid 1px #dabdc4;
+  border: solid 1px #897294;
 }
 
 .nav-link {
   text-align: center;
   font-weight: bold;
-  border: solid 1px;
-  margin: 2px;  
+  border: solid 1px #897294;
+  margin: 2px;
+  color:#897294; 
 }
 
 .nav-item {
@@ -23,8 +24,10 @@
   width: 50%;
 }
 
-.active {
-  border: solid 1px #007bff;
+.there {
+  border: solid 1px #897294;
+  background-color: #897294;
+  color: white;
 }
 
 i {
@@ -41,12 +44,12 @@ i {
 .card img {
   max-width: 90%;
   height: auto;
-  border: solid 2px #ca7c59;
+  border: solid 2px #754e3c;
   margin: auto;
 }
 
 .card {
-  background-color: #eacdc2;
+  background-color: #caa9c6;
   max-width: 95%;  
   padding: 2% 2% 0% 2%;
   height: 100%;
@@ -54,16 +57,16 @@ i {
 }
 
 .bottom_panel {
-  background-color: #c3a3a3;
+  background-color: #897294;
   max-width: 95%;  
   height: 100%;
   border-radius: 5px;
-  border: solid 1px #dabdc4;
+  border: solid 1px #caa9c6;
   margin: 20px auto 0px auto;
 }
 
 .command {
-  background-color: #5546ff;
+  background-color: #637bb7;
   color: white;
 }
 
@@ -72,7 +75,7 @@ i {
   border-radius: 50%;
   padding: 10px;
   font-size: 3rem;
-  color: #5546ff;
+  color: #637bb7;
   background-color: white;
 }
 
@@ -81,7 +84,7 @@ i {
   flex-direction: column;
   text-align: center;
   p {
-    color: #5546ff;
+    color: #637bb7;
     font-weight: bold;
   }
 }
@@ -208,6 +211,15 @@ i {
     font-weight: 400;
   }  
 
+a, a:hover {
+  color: #637bb7;
+  text-decoration: none;
+  outline: none;
+}
+
+.btn:hover {
+  color: white;
+}
 
 p {
   color: #774d57;
@@ -250,7 +262,7 @@ p {
     border-bottom: solid 1px;
     padding-bottom: 10px;
   }
-  background-color: #c3a3a3;
+  background-color: #897294;
 }
 
 #validate_order {
@@ -272,7 +284,7 @@ body {
 /* Custom page header */
 .header {
   padding-bottom: 1rem;
-  border-bottom: 2px solid #7810ff;
+  border-bottom: 2px solid #897294;
   margin-bottom: 2rem;
   max-width: 95%;
   margin: 0rem auto 1rem auto;

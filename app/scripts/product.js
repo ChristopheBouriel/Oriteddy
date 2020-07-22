@@ -123,8 +123,19 @@ function addBasket(infos) {
 
 function showTotalArticles() {
     let totalArticles = document.getElementById('total_articles');
-    totalArticles.innerHTML = localStorage.getItem("totalArticles");
-};
+    let checkBasket = localStorage.getItem("totalArticles");
+    checkBasket = parseFloat(checkBasket);
+    console.log(checkBasket);
+    if(checkBasket != 0) {
+      totalArticles.innerHTML = localStorage.getItem("totalArticles");
+      console.log('zut');
+    }
+    else {
+      let totalArticles = document.getElementById('total_articles');
+      totalArticles.innerHTML = '';
+      console.log('put');
+    }
+  }
 
 let model = window.location.search;
 let idItem = model.substring(1);

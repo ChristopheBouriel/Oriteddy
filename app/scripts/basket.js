@@ -175,22 +175,27 @@ function createTotalLign() {
 function showTotal() {
     let seeTotalOrder = document.getElementById('total_order');
     if (totalOrder != 0) {    
-    seeTotalOrder.innerHTML = '<p>Total de votre panier : ' + totalOrder + '</p><a href="index.html" class="btn command" id="reset_basket">Vider le panier</a>';
+    seeTotalOrder.innerHTML = '<p>Total de votre panier : ' + totalOrder + '</p><a href="index.html" class="btn command" id="reset_basket">Vider le panier</a>'; 
+    
     }
     else {
     seeTotalOrder.innerHTML = '<p>Votre panier est vide</p>';
-    for(let idItem of idItemsTab) {
-        localStorage.setItem(idItem, '');            
-    }
+        for(let idItem of idItemsTab) {
+            localStorage.setItem(idItem, '');            
+        }
+        let totalArticles = document.getElementById('total_articles');
+      totalArticles.innerHTML = '';       
     }
     let seeTotalArticles = document.getElementById('total_articles');
     seeTotalArticles.innerHTML = totalTeddiesOrder;
-    
-    localStorage.setItem("totalArticles", totalTeddiesOrder);
     console.log(localStorage.getItem("totalArticles"));
+    localStorage.setItem("totalArticles", totalTeddiesOrder);
     resetBasket();
-
+    
 }
+
+
+
 
 //suppression du modèle d'une certaine couleur à l'affichage (vue)
 function removeTeddyColorAll() {
@@ -231,11 +236,13 @@ function removeTeddyColorAll() {
                             }                           
                         }                    
                     }
-                    showTotal();               
+                                   
                 }    
             }
             console.log(finalOrder);
-            newBasket();            
+            newBasket();
+            
+                    showTotal();            
             console.log(totalTeddyItems);
         })
     }
