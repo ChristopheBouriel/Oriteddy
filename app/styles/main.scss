@@ -21,7 +21,7 @@
 }
 
 .nav {
-  width: 50%;
+  width: 70%;
 }
 
 .there {
@@ -187,7 +187,7 @@ i {
   padding: 5px 10px 0px 0px;
 }
 
-.teddy_item_order {
+.teddy_item_order, .teddy_each {
   margin: 0px 5px 5px 5px;
   background-color: #f3e9f1;
   padding: 5px 10px 0px 0px;
@@ -212,7 +212,7 @@ i {
   }  
 
 a, a:hover {
-  color: #637bb7;
+  color: #ffffff;
   text-decoration: none;
   outline: none;
 }
@@ -258,15 +258,34 @@ p {
 .order_infos {
   p {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
     border-bottom: solid 1px;
     padding-bottom: 10px;
+    color: rgb(65, 62, 62);
   }
   background-color: #897294;
 }
 
-#validate_order {
+#validate_button {
   text-align: center;
+}
+
+.back_button {
+  
+  color: #637bb7;
+  
+}
+
+.teddy_each .ref_teddy {
+  font-size: 0.5rem;
+  font-weight: normal;
+}
+
+#show_total, #order_number {
+  background-color: white;
+  margin: 10px 3px 20px 3px;
+  border: #646464 solid 2px;
 }
 
 
@@ -332,7 +351,7 @@ h1 {
   
 }
 
-@media (min-width: 576.02px) {
+@media (min-width: 576px) {
   .teddy_item_order_color {
     margin: 0px 15px 5px 15px;  
     padding: 5px 10px 0px 0px;
@@ -343,6 +362,12 @@ h1 {
     padding: 5px 10px 0px 0px;    
   }
 }
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .nav {
+    width: 100%;
+  }
+  }
 
 
 

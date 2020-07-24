@@ -109,11 +109,11 @@ function addBasket(infos) {
                 console.log(localStorage.getItem(idItem));
                 
             }
-            let allArticles = localStorage.getItem("totalArticles");
+            let allArticles = localStorage.getItem('totalArticles');
             allArticles = parseFloat(allArticles);
             let adds = addItems[1];            
             allArticles = allArticles + adds;            
-            localStorage.setItem("totalArticles", allArticles);
+            localStorage.setItem('totalArticles', allArticles);
             showTotalArticles();
             addItems = [];
             let showQuantity = document.getElementById('quantity_choice');
@@ -123,11 +123,11 @@ function addBasket(infos) {
 
 function showTotalArticles() {
     let totalArticles = document.getElementById('total_articles');
-    let checkBasket = localStorage.getItem("totalArticles");
+    let checkBasket = localStorage.getItem('totalArticles');
     checkBasket = parseFloat(checkBasket);
     console.log(checkBasket);
     if(checkBasket != 0) {
-      totalArticles.innerHTML = localStorage.getItem("totalArticles");
+      totalArticles.innerHTML = localStorage.getItem('totalArticles');
       console.log('zut');
     }
     else {

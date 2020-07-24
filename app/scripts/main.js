@@ -1,11 +1,11 @@
 
   function showTotalArticles() {
     let totalArticles = document.getElementById('total_articles');
-    let checkBasket = localStorage.getItem("totalArticles");
+    let checkBasket = localStorage.getItem('totalArticles');
     checkBasket = parseFloat(checkBasket);
     console.log(checkBasket);
     if(checkBasket != 0) {
-      totalArticles.innerHTML = localStorage.getItem("totalArticles");
+      totalArticles.innerHTML = localStorage.getItem('totalArticles');
       console.log('zut');
     }
     else {
@@ -37,10 +37,10 @@ function readList(list) {
                   console.log('ok')
                 }
               }
-              let seeTotalArticles = localStorage.getItem("totalArticles");
+              let seeTotalArticles = localStorage.getItem('totalArticles');
     console.log(seeTotalArticles);
     if (seeTotalArticles === null) {
-      localStorage.setItem("totalArticles", '');
+      localStorage.setItem('totalArticles', '');
       console.log('raz')  
     }
     

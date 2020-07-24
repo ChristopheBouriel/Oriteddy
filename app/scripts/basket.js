@@ -1,16 +1,18 @@
+
+
 getAllTeddiesInfos();
 
 function getAllTeddiesInfos() {  
     return fetch('http://localhost:3000/api/teddies').then(response => response.json()).then(json => {makeIdTab(json);});  
   }
 
-let idItemsTab = [];
-let totalOrder = 0;
-let totalTeddiesOrder = 0;
-let removeBasketTable = [];
-let colorNumberTableAll = [];
-let totalTeddyItems = [];
-let finalOrder = [];
+let idItemsTab = []; //tableau des id des produits
+let totalOrder = 0; //montant total de la commande
+let totalTeddiesOrder = 0; //nombre total d'articles
+let removeBasketTable = []; //tableau des produits affichés initialement et donc susceptibles d'être ôtés
+let colorNumberTableAll = []; //tableau initial de toutes les variantes de teddies, modèle ET couleur, sans répétition si la variante a été ajoutée plusieurs fois
+let totalTeddyItems = []; //tableau des différents modèles avec notamment le nombre total de chaque, toutes couleurs confondues
+let finalOrder = []; ////tableau de toutes les variantes de teddies, modèle ET couleur, après modification éventuelle
 
 //écriture du tableau des id
 function makeIdTab(infos) {    
@@ -41,6 +43,7 @@ function makeBasicListFromStorage(idItemsTab) {
     removeOneItem();
     addOneItem();
     resetBasket();
+    wannaMakeOrder();
     console.log(colorNumberTableAll);
 } 
 
@@ -89,7 +92,8 @@ function makeListByColorItem(totalTeddyList, idItem) {
     console.log(colorNumberTableAll);
     showNumberColorEach(colorNumberTable);
     showNumberEach(teddyName, teddyPrice, totalTeddy, idItem);
-    makeFinalOrder(colorNumberTable);    
+    makeFinalOrder(colorNumberTable);
+       
 }
 
 // affichage initial des articles d'une certaine couleur pour chaque modèle
@@ -128,7 +132,7 @@ function showNumberEach(teddyName, teddyPrice, totalTeddy, idItem) {
     newTeddyOrder.innerHTML = '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-7">'
     + teddyName + '</p><p class="col-3">Quantité</p>'
     + '<p class="subtotal col-2 text-right">Montant</p></div><div class="row no-gutters make_subtotal">'
-     + '<a class="col-7" href="oribear-item.html?' + idItem + '">Revoir</a><p class="col-3">' + totalTeddy + '</p><p class="subtotal col-2 text-right">' + totalTeddy*teddyPrice + '</p></div></div>';
+     + '<a class="col-7 back_button" href="oribear-item.html?' + idItem + '">Revoir l\'article</a><p class="col-3">' + totalTeddy + '</p><p class="subtotal col-2 text-right">' + totalTeddy*teddyPrice + '</p></div></div>';
 
     let totalTeddyFinal = [];
     totalTeddyFinal[0] = teddyName;
@@ -138,7 +142,8 @@ function showNumberEach(teddyName, teddyPrice, totalTeddy, idItem) {
     totalTeddyFinal[4] = idItem
     totalTeddyItems.push(totalTeddyFinal);    
     };
-    console.log(totalTeddyItems);    
+    console.log(totalTeddyItems);
+        
 }
 
 //constitution initiale de la liste avant commande
@@ -188,8 +193,8 @@ function showTotal() {
     }
     let seeTotalArticles = document.getElementById('total_articles');
     seeTotalArticles.innerHTML = totalTeddiesOrder;
-    console.log(localStorage.getItem("totalArticles"));
-    localStorage.setItem("totalArticles", totalTeddiesOrder);
+    console.log(localStorage.getItem('totalArticles'));
+    localStorage.setItem('totalArticles', totalTeddiesOrder);
     resetBasket();
     
 }
@@ -242,7 +247,7 @@ function removeTeddyColorAll() {
             console.log(finalOrder);
             newBasket();
             
-                    showTotal();            
+            showTotal();            
             console.log(totalTeddyItems);
         })
     }
@@ -276,7 +281,7 @@ function resetBasket() {
         for(let idItem of idItemsTab) {
             localStorage.setItem(idItem, '');            
         }
-        localStorage.setItem("totalArticles", '');        
+        localStorage.setItem('totalArticles', '');        
     })
 }
 
@@ -295,7 +300,7 @@ function modifyLignEach(newTotalTeddy, teddyName) {
     changeSubtotal.innerHTML = '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-7">'
     + newTotalTeddy[0] + '</p><p class="col-3">Quantité</p>'
     + '<p class="subtotal col-2 text-right">Montant</p></div><div class="row no-gutters make_subtotal">'
-     + '<a class="col-7" href="oribear-item.html?' + newTotalTeddy[4] + '">Revoir</a><p class="col-3">' + newTotalTeddy[1] + '</p><p class="subtotal col-2 text-right">' + newTotalTeddy[1]*newTotalTeddy[2] + '</p></div></div>';
+     + '<a class="col-7 back_button" href="oribear-item.html?' + newTotalTeddy[4] + '">Revoir l\'article</a><p class="col-3">' + newTotalTeddy[1] + '</p><p class="subtotal col-2 text-right">' + newTotalTeddy[1]*newTotalTeddy[2] + '</p></div></div>';
 }
 
 //détection et traitement du clic sur un bouton -
@@ -372,3 +377,86 @@ function addOneItem() {
         })
     }
 }
+
+
+
+function makeContact() {
+    let firstName = $("#firstname").val();
+    let lastName = $('#lastname').val();
+    let address = $('#address').val();
+    let city = $('#city').val();
+    let email = $('#email').val();
+    let currentUser = new User(firstName, lastName, address, city, email);
+    makeIdList(currentUser);
+}
+
+function makeIdList(currentUser) {
+    let idList = [];
+    for(let g of totalTeddyItems) {
+        idList.push(g[4]);
+    }
+    console.log(idList);
+    localStorage.setItem("orderResume", JSON.stringify(totalTeddyItems)); //pour afficher le résumé dans la confirmation de commande
+    console.log(localStorage.getItem("orderResume"));
+    makeBodyPost(currentUser, idList);
+}
+
+function makeBodyPost(currentUser, idList) {
+    let obj = new Order (currentUser, idList)
+    console.log(obj);
+    sendOrder(obj);
+}
+class User {
+    constructor(firstName, lastName, address, city, email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.email = email;
+    }
+}
+class Order {
+    constructor(user, orderList) {
+        this.contact = user;
+        this.products = orderList;
+    }
+}
+
+function sendOrder(obj) {
+    return fetch('http://localhost:3000/api/teddies/order', {
+        method: 'POST',        
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(obj),
+    })
+    .then(response => response.json())
+    .then(json => showConfirmation(json));
+}
+
+function showConfirmation(confirmedOrder) {
+    console.log(confirmedOrder);
+    let infos = Object.values(confirmedOrder);
+    let orderNumber = infos[2];
+    console.log(orderNumber);
+    localStorage.setItem("idOrder", orderNumber);
+    console.log(localStorage.idOrder);
+    
+    localStorage.setItem("isNew", 1);
+    console.log(localStorage.isNew);
+    //goToOrder();
+}
+
+
+function wannaMakeOrder() {
+    const validated = document.getElementById('validate_order');
+    validated.addEventListener('click', function(event) {
+        event.preventDefault;
+        event.stopPropagation;        
+        makeContact();       
+    })
+}
+
+function goToOrder(){
+    document.location.href="oribear-order.html"; 
+  }

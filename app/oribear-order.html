@@ -17,6 +17,7 @@
     <!-- build:js scripts/modernizr.js -->
     <script src="scripts/modernizr.js"></script>
     <!-- endbuild -->
+    <script src="https://kit.fontawesome.com/d034220892.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <!--[if IE]>
@@ -27,35 +28,53 @@
         
         <div class="container-fluid">
           <div class="row">
-            <h3 class="text-muted d-none d-sm-block ml-2 mb-3">Oriteddy.fr</h3>
-            <ul class="nav nav-pills mx-auto mx-sm-0 ml-sm-auto mb-3">
-              <li class="nav-item">
-                <a href="index.html" class="nav-link">Accueil</a>
-              </li>
-              
-              <li class="nav-item">
-                <a href="oribear-basket.html" class="nav-link">Panier</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link active">Commande</a>
-              </li>
-            </ul>
-          </div>
-        </div> 
-
-          <div class="container-fluid" id="banner">
-            <div class="row">
-              <img class="col-4 pl-md-5 mt-2 mt-md-4 mb-md-4 mx-auto" src="images/Ori_logo.png" alt="logo">
-              <h1 class="col-10 mb-2 mx-auto col-md-8 pr-md-5 text-center align-self-center">Oriteddy</h1>
+            <div class="col-12 my-2">
+              <div class="row">
+                <h3 class="text-muted d-none d-md-block ml-2 mb-3">Oriteddy.fr</h3>
+                <ul class="nav nav-pills mx-auto mx-sm-0 ml-sm-auto mb-3">
+                  
+                  <li class="nav-item">
+                    <a href="#" class="nav-link there">Commande</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="oribear-basket.html" class="nav-link"> <i class="fas fa-shopping-cart"></i> <span id="total_articles"></span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                  </li>
+                  
+                </ul>
+              </div>
             </div>
-          </div>
-        
+  
+            <div class="col-12 my-2 order-first order-md-2" id="banner">
+              <div class="row">
+                <img class="col-4 pl-md-5 mt-2 mt-md-4 mb-md-4 mx-auto" src="images/Ori_logo.png" alt="logo">
+                <h1 class="col-10 mx-auto col-md-8 pr-md-5 text-center align-self-center">Oriteddy</h1>
+              </div>
+            </div>
+        </div>
+
+        </div>
       </header>
 
-      <div class="row">
-        <div class="col-lg-6 card">
-          
-          
+      <div class="row no-gutters">
+        <div class="col-lg-6 card" id="order_answer">
+          <div id="message_order" class="text-center">
+
+          </div>
+          <div id="order_infos">
+            <div id="order_number">
+
+            </div>
+            <div id="resume">
+
+            </div>
+            <div id="total_paid">            
+                <div class="row" id="show_total">
+                </div>            
+            </div>
+          </div>  
         </div>
       </div>
 
@@ -68,7 +87,8 @@
     <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- endbuild -->
     <!-- build:js scripts/main.js -->
-    <script src="scripts/main.js"></script>
+    <script src="scripts/order-set.js"></script>
     <!-- endbuild -->
+    
   </body>
 </html>
