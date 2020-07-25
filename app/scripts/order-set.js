@@ -42,14 +42,14 @@ function buildOrder() {
 
         localStorage.setItem(teddy[4], '');
         console.log(localStorage.getItem(teddy[4]));
-        localStorage.setItem("totalArticles", '');
+        localStorage.setItem('totalArticles', '');
     }
     
         let showTotal = document.getElementById('show_total');
         
         showTotal.innerHTML = '<p class="col-8 pt-2">Montant total : </p><p class="col-4 pt-2 text-right">' + totalOrder + '</p>';
 
-    localStorage.setItem("isNew", 0);
+    localStorage.setItem('isNew', 0);
     
 }
 

@@ -67,26 +67,26 @@
             </div>
             <div class="col-lg-5 card mx-auto order_infos">
               <p>Veuillez remplir le formulaire puis envoyer pour valider votre commande</p>
-              <form id="form_1" novalidate success-msg="Your order has been sent." fail-msg="Sorry it seems that our server is not responding, Sorry for the inconvenience!">
+              <form id="form_1" onsubmit="return makeContact()" >
                 <div class="form-group">
                     <label for="firstname">Prenom</label>
-                    <input id="firstname" class="form-control" required />
+                    <input id="firstname" class="form-control" required type="text" pattern="([a-zA-Z- ]{2,40})"/>
                 </div>
                 <div class="form-group">
                     <label for="lastname">Nom</label>
-                    <input id="lastname" class="form-control" required />
+                    <input id="lastname" class="form-control" required type="text" pattern="([a-zA-Z- ]{2,40})"/>
                 </div>
                 <div class="form-group">
                     <label for="address">Adresse</label>
-                    <input id="address" class="form-control" required />
+                    <input id="address" class="form-control" required type="text" pattern="([0-9]*) ?([a-zA-Z, ]*)"/>
                 </div>
                 <div class="form-group">
                     <label for="city">Ville</label>
-                    <input id="city" class="form-control" required placeholder="73000 Chambéry" />
+                    <input id="city" class="form-control" required type="text" placeholder="73000 Chambéry" pattern="([0-9]*) ?([a-zA-Z,-\. ]*)"/>
                 </div>
                 <div class="form-group">
                     <label for="email">Adresse email</label>
-                    <input id="email" class="form-control" type="email" required />
+                    <input id="email" class="form-control" type="email" name="adresse_mail" required />
                 </div>
                 <div id="validate_button">
                   <button class="btn command mb-2" type="submit" id="validate_order" >

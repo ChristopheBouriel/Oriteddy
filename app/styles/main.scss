@@ -288,6 +288,9 @@ p {
   border: #646464 solid 2px;
 }
 
+input:invalid {
+  box-shadow: 0 0 5px 1px red;
+}
 
 /* Space out content a bit */
 body {
