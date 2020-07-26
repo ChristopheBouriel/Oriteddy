@@ -380,15 +380,17 @@ function addOneItem() {
 
 
 function makeContact() {
-    let firstName = $('#firstname').val();
-    let lastName = $('#lastname').val();
-    let address = $('#address').val();
-    let city = $('#city').val();
-    let email = $('#email').val();
-    let currentUser = new User(firstName, lastName, address, city, email);
-    console.log(currentUser);
-    makeIdList(currentUser);
-    return false;
+    if(totalOrder != 0) {
+       let firstName = $('#firstname').val();
+        let lastName = $('#lastname').val();
+        let address = $('#address').val();
+        let city = $('#city').val();
+        let email = $('#email').val();
+        let currentUser = new User(firstName, lastName, address, city, email);
+        console.log(currentUser);
+        makeIdList(currentUser);
+        return false;
+    }   
 }
 
 //création du tableau des références commandées et stockage du tableau détaillé de la commande pour la page "Commande"
@@ -408,9 +410,8 @@ function makeBodyPost(currentUser, idList) {
     let obj = new Order (currentUser, idList)
     console.log(obj);
     if(totalOrder != 0) {
-        sendOrder(obj)
+        sendOrder(obj);
     }
-    ;
 }
 class User {
     constructor(firstName, lastName, address, city, email) {

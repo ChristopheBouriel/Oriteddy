@@ -70,19 +70,19 @@
               <form id="form_1" onsubmit="return makeContact()" >
                 <div class="form-group">
                     <label for="firstname">Prenom</label>
-                    <input id="firstname" class="form-control" required type="text" pattern="([a-zA-Z- ]{2,40})"/>
+                    <input id="firstname" class="form-control" required type="text" pattern="([a-zA-ZÀ-Ö0-öø-ÿ- ]{2,40})"/>
                 </div>
                 <div class="form-group">
                     <label for="lastname">Nom</label>
-                    <input id="lastname" class="form-control" required type="text" pattern="([a-zA-Z- ]{2,40})"/>
+                    <input id="lastname" class="form-control" required type="text" pattern="(([a-zA-ZÀ-Ö0-öø-ÿ- ]{2,40}))"/>
                 </div>
                 <div class="form-group">
                     <label for="address">Adresse</label>
-                    <input id="address" class="form-control" required type="text" pattern="([0-9]*) ?([a-zA-Z, ]*)"/>
+                    <input id="address" class="form-control" required type="text" pattern="(?[0-9]*) ?([a-zA-Z,\. ]{6,100})"/>
                 </div>
                 <div class="form-group">
                     <label for="city">Ville</label>
-                    <input id="city" class="form-control" required type="text" placeholder="73000 Chambéry" pattern="([0-9]*) ?([a-zA-Z,-\. ]*)"/>
+                    <input id="city" class="form-control" required type="text" placeholder="73000 Chambéry" pattern="([0-9]{0,5}) ?([a-zA-Z,- ]{2,40})"/>
                 </div>
                 <div class="form-group">
                     <label for="email">Adresse email</label>
