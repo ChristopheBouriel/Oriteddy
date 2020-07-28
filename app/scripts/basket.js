@@ -378,16 +378,17 @@ function addOneItem() {
     }
 }
 
-
+//création de l'objet "contact"
 function makeContact() {
     if(totalOrder != 0) {
-       let firstName = $('#firstname').val();
+        let firstName = $('#firstname').val();
         let lastName = $('#lastname').val();
         let address = $('#address').val();
         let city = $('#city').val();
         let email = $('#email').val();
         let currentUser = new User(firstName, lastName, address, city, email);
         console.log(currentUser);
+
         makeIdList(currentUser);
         return false;
     }   
@@ -413,6 +414,7 @@ function makeBodyPost(currentUser, idList) {
         sendOrder(obj);
     }
 }
+
 class User {
     constructor(firstName, lastName, address, city, email) {
         this.firstName = firstName;
@@ -453,6 +455,16 @@ function showConfirmation(confirmedOrder) {
     
     localStorage.setItem('isNew', 1);
     console.log(localStorage.isNew);
+
+    let a = Object.values(infos[0]);
+    let idUser = a[0] + a[1];
+    console.log(idUser);
+    let lastOrder = {"orderId": infos[2], "saveOrder": JSON.parse(localStorage.orderResume)};
+    localStorage.setItem(idUser,JSON.stringify(lastOrder));
+    console.log(localStorage.getItem(idUser));
+
+
+
     goToOrder();
 }
 

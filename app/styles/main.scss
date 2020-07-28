@@ -282,14 +282,14 @@ p {
   font-weight: normal;
 }
 
-#show_total, #order_number {
+.order_view {
   background-color: white;
   margin: 10px 3px 20px 3px;
   border: #646464 solid 2px;
 }
 
 input:invalid {
-  box-shadow: 0 0 5px 1px red;
+  box-shadow: 0 0 5px 1px rgb(182, 66, 66);
 }
 
 /* Space out content a bit */

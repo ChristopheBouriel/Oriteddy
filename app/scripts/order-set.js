@@ -4,29 +4,94 @@ function checkNew() {
     if( check == 1) {
         let message = document.getElementById('message_order');
         message.innerHTML = '<p>Votre demande a bien été prise en compte</p><p>Merci de votre confiance !</p>'
-        buildOrder();
+        
+        buildNewOrder();
     }
-    else if( check == 0) {
-        let message = document.getElementById('message_order');
-        message.innerHTML = '<p>Votre dernière commande effectuée</p>'
-        buildOrder();
+    else {
+        //let message = document.getElementById('message_order');
+        //message.innerHTML = '<p>Votre dernière commande effectuée</p>'
+        //buildOrder();
+        askInfos();
         
     }
-    else{
-        let message = document.getElementById('message_order');
-        let suppress = document.getElementById('order_infos');
-        message.innerHTML = '<p>Nous n\'avons pas trouvé de commande récente effectuée depuis ce navigateur</p>'
-        let remove = document.getElementById('order_answer');
-        remove.removeChild(suppress);
-    }
+    
 }
 
-function buildOrder() {
-    let orderNumber = document.getElementById('order_number');    
+function buildNewOrder() {
+    let orderNumber = document.getElementById('order_number');
+    orderNumber.classList.add('order_view');   
     orderNumber.innerHTML = 
     '<div class="mt-2 ml-3"><p class="mb-1">Votre numéro de commande : </p><p>' + localStorage.idOrder + '</p></div>';
     let resume = JSON.parse(localStorage.orderResume);
     console.log(resume);
+    let newOrder = true;
+    localStorage.setItem('isNew', 0);
+    writeResume(resume, newOrder);
+}
+
+
+checkNew();
+//localStorage.setItem("isNew", '');
+//localStorage.setItem("isNew", 1);
+
+function askInfos() {
+
+    let message = document.getElementById('user_infos');
+        message.innerHTML = '<p class="text-center" id="initial_message">Veuillez remplir les champs suivants afin que nous retrouvions votre dernière commande' +
+        '<form id="form_2" onsubmit="return searchOrder()">' +
+  '<div class="form-group">' +
+      '<label for="firstname">Prenom</label>' +
+      '<input id="firstname" class="form-control" required type="text"/></div>' +
+  '<div class="form-group">' +
+      '<label for="lastname">Nom</label>' +
+      '<input id="lastname" class="form-control" required type="text"/></div>' +
+  '<div class="form-group">' +
+      '<label for="email">Adresse email</label>' +
+      '<input id="email" class="form-control" type="email" name="adresse_mail" required /></div>' +
+  '<div id="validate_button">' +
+    '<button class="btn command mb-2" type="submit" id="validate_order">Valider</button></div></form>';
+}
+
+function searchOrder() {
+    let firstName = $('#firstname').val();
+    let lastName = $('#lastname').val();
+    let checkUser = firstName + lastName;
+        
+    let checkOrder = localStorage.getItem(checkUser);
+    checkOrder = JSON.parse(checkOrder);
+    console.log(checkOrder);
+
+    if(checkOrder === null) {
+        let message = document.getElementById('message_order');
+        message.innerHTML = '<p>Nous n\'avons pas trouvé de commande récente à ce nom effectuée depuis ce navigateur</p>'
+        + '<p>Veuillez vérifier les informations que vous avez saisies</p>';
+        let suppress = document.getElementById('initial_message');        
+        let remove = document.getElementById('user_infos');
+        remove.removeChild(suppress);            
+    }
+    else {
+        tata(checkOrder);
+    }
+    return false;    
+}
+
+
+function tata(checkOrder) {
+    
+    let lastOrder = Object.values(checkOrder)
+    let lastResume = lastOrder[1];
+    console.log(lastResume);
+    let oldOrder = false;
+    let message = document.getElementById('message_order');
+    message.innerHTML = '<p>Votre dernière commande effectuée portant le numéro :</p><p>' + lastOrder[0] + '</p>';
+    let suppress = document.getElementById('order_number');        
+    let remove = document.getElementById('order_infos');
+    remove.removeChild(suppress); 
+    writeResume(lastResume, oldOrder);
+         
+}
+
+function writeResume(resume, newOrder) {
     let totalOrder = 0;
     for(let teddy of resume) {
         totalOrder = totalOrder + teddy[3];
@@ -40,20 +105,16 @@ function buildOrder() {
     + '<p class="subtotal col-2 text-right">Montant</p></div><div class="row no-gutters make_subtotal">'
      + '<p class="col-7 ref_teddy">ref : ' + teddy[4] + '</p><p class="col-3 text-center">' + teddy[1] + '</p><p class="subtotal col-2 text-right">' + teddy[3] + '</p></div></div>';
 
-        localStorage.setItem(teddy[4], '');
-        console.log(localStorage.getItem(teddy[4]));
-        localStorage.setItem('totalArticles', '');
+        if(newOrder === true) {
+            localStorage.setItem(teddy[4], '');
+            console.log(localStorage.getItem(teddy[4]));
+            localStorage.setItem('totalArticles', '');
+        }        
     }
-    
-        let showTotal = document.getElementById('show_total');
-        
-        showTotal.innerHTML = '<p class="col-8 pt-2">Montant total : </p><p class="col-4 pt-2 text-right">' + totalOrder + '</p>';
-
-    localStorage.setItem('isNew', 0);
-    
+    let showTotal = document.getElementById('show_total');
+    showTotal.classList.add('order_view');        
+    showTotal.innerHTML = '<p class="col-8 pt-2">Montant total : </p><p class="col-4 pt-2 text-right">' + totalOrder + '</p>';
+    let suppress = document.getElementById('user_infos');        
+        let remove = document.getElementById('order_infos');
+        remove.removeChild(suppress);     
 }
-
-
-checkNew();
-//localStorage.setItem("isNew", '');
-//localStorage.setItem("isNew", 1);
