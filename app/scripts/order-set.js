@@ -4,17 +4,11 @@ function checkNew() {
     if( check == 1) {
         let message = document.getElementById('message_order');
         message.innerHTML = '<p>Votre demande a bien été prise en compte</p><p>Merci de votre confiance !</p>'
-        
         buildNewOrder();
     }
     else {
-        //let message = document.getElementById('message_order');
-        //message.innerHTML = '<p>Votre dernière commande effectuée</p>'
-        //buildOrder();
-        askInfos();
-        
-    }
-    
+        askInfos();   
+    }    
 }
 
 function buildNewOrder() {
@@ -28,7 +22,6 @@ function buildNewOrder() {
     localStorage.setItem('isNew', 0);
     writeResume(resume, newOrder);
 }
-
 
 checkNew();
 //localStorage.setItem("isNew", '');
@@ -55,12 +48,10 @@ function askInfos() {
 function searchOrder() {
     let firstName = $('#firstname').val();
     let lastName = $('#lastname').val();
-    let checkUser = firstName + lastName;
-        
+    let checkUser = firstName + lastName;        
     let checkOrder = localStorage.getItem(checkUser);
     checkOrder = JSON.parse(checkOrder);
     console.log(checkOrder);
-
     if(checkOrder === null) {
         let message = document.getElementById('message_order');
         message.innerHTML = '<p>Nous n\'avons pas trouvé de commande récente à ce nom effectuée depuis ce navigateur</p>'
@@ -70,14 +61,17 @@ function searchOrder() {
         remove.removeChild(suppress);            
     }
     else {
-        tata(checkOrder);
+        buildOldOrder(checkOrder);
     }
     return false;    
 }
 
+function convertCents(priceCent) {
+    let priceEuro = priceCent/100;
+    return priceEuro;
+}
 
-function tata(checkOrder) {
-    
+function buildOldOrder(checkOrder) {    
     let lastOrder = Object.values(checkOrder)
     let lastResume = lastOrder[1];
     console.log(lastResume);
@@ -87,23 +81,24 @@ function tata(checkOrder) {
     let suppress = document.getElementById('order_number');        
     let remove = document.getElementById('order_infos');
     remove.removeChild(suppress); 
-    writeResume(lastResume, oldOrder);
-         
+    writeResume(lastResume, oldOrder);         
 }
 
 function writeResume(resume, newOrder) {
     let totalOrder = 0;
+    let teddyLine = '';
+    let showResume = '';
     for(let teddy of resume) {
         totalOrder = totalOrder + teddy[3];
-        const showResume = document.createElement('div');
+        showResume = document.createElement('div');
         showResume.classList.add('mb-2', 'teddy_each');
-        let teddyLine = document.getElementById('resume');
+        teddyLine = document.getElementById('resume');
         teddyLine.appendChild(showResume);
         showResume.innerHTML =
         '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-4">'
-    + teddy[0] + '</p><p class="col-3 text-left">Prix : '+ teddy[2] + '</p><p class="col-3 text-center">Quantité</p>'
-    + '<p class="subtotal col-2 text-right">Montant</p></div><div class="row no-gutters make_subtotal">'
-     + '<p class="col-7 ref_teddy">ref : ' + teddy[4] + '</p><p class="col-3 text-center">' + teddy[1] + '</p><p class="subtotal col-2 text-right">' + teddy[3] + '</p></div></div>';
+        + teddy[0] + '</p><p class="col-3 text-left">Prix : '+ convertCents(teddy[2]) + ' €</p><p class="col-3 text-center">Quantité</p>'
+        + '<p class="subtotal col-2 text-right">Montant</p></div><div class="row no-gutters make_subtotal">'
+        + '<p class="col-7 ref_teddy">ref : ' + teddy[4] + '</p><p class="col-3 text-center">' + teddy[1] + '</p><p class="subtotal col-2 text-right">' + convertCents(teddy[3]) + ' €</p></div></div>';
 
         if(newOrder === true) {
             localStorage.setItem(teddy[4], '');
@@ -113,8 +108,8 @@ function writeResume(resume, newOrder) {
     }
     let showTotal = document.getElementById('show_total');
     showTotal.classList.add('order_view');        
-    showTotal.innerHTML = '<p class="col-8 pt-2">Montant total : </p><p class="col-4 pt-2 text-right">' + totalOrder + '</p>';
+    showTotal.innerHTML = '<p class="col-8 pt-2">Montant total : </p><p class="col-4 pt-2 text-right">' + convertCents(totalOrder) + ' €</p>';
     let suppress = document.getElementById('user_infos');        
-        let remove = document.getElementById('order_infos');
-        remove.removeChild(suppress);     
+    let remove = document.getElementById('order_infos');
+    remove.removeChild(suppress);     
 }

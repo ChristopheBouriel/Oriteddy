@@ -1,7 +1,3 @@
-/*.nav-item .active {
-  background-color: #f14e0d;
-}*/
-
 #banner {
   background-color: #f3e9f1;
   border-radius: 5px;
@@ -39,7 +35,7 @@ i {
     margin-top: 0px;
     font-weight: bold;
     font-size: 0.8rem;
-  }
+}
 
 .card img {
   max-width: 90%;
@@ -89,7 +85,6 @@ i {
   }
 }
 
-
 .teddy_view_nav {
   display: flex; 
   align-self: center;
@@ -114,7 +109,6 @@ i {
 #color_infos {
   display: flex;
   justify-content: flex-start;
-  
 }
 
 .option_stuff {
@@ -167,7 +161,6 @@ i {
   font-size: 1rem;
   border-radius: 5px;
   padding: 9px 20px 9px 20px;
-  
   a {
     color:white;
   }
@@ -178,7 +171,6 @@ i {
   justify-content: start;
   align-items: center;
   padding-left: 10px;
- 
 }
 
 .teddy_item_order_color {
@@ -202,19 +194,30 @@ i {
 .make_subtotal {
   font-size: 0.8rem;
   text-align: start;
-  
 }
 
 .title_line p {
     margin-bottom: 0px;
     color: black;
     font-weight: 400;
-  }  
+}  
 
 a, a:hover {
   color: #ffffff;
   text-decoration: none;
   outline: none;
+}
+
+.quantity_infos a:hover {
+    color: #ffffff;
+}
+
+.nav-link:hover {
+  color: #637bb7;  
+}
+
+.there:hover {
+    color: #ffffff;
 }
 
 .btn:hover {
@@ -239,7 +242,6 @@ p {
   align-items: center;
   width: 130px;
   justify-content: center;
-  
   border-radius: 5px;
 }
 
@@ -256,6 +258,7 @@ p {
 }
 
 .order_infos {
+  background-color: #897294;
   p {
     text-align: center;
     font-size: 1.1rem;
@@ -264,7 +267,6 @@ p {
     padding-bottom: 10px;
     color: rgb(65, 62, 62);
   }
-  background-color: #897294;
 }
 
 #validate_button {
@@ -272,9 +274,10 @@ p {
 }
 
 .back_button {
-  
   color: #637bb7;
-  
+  &:hover {
+    color: #897294;
+  }
 }
 
 .teddy_each .ref_teddy {
@@ -289,7 +292,7 @@ p {
 }
 
 input:invalid {
-  box-shadow: 0 0 5px 1px rgb(182, 66, 66);
+  box-shadow: 0 0 5px 1px #b64242;
 }
 
 /* Space out content a bit */
@@ -299,9 +302,6 @@ body {
   max-width: 990px;
   margin: auto;
 }
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-
 
 /* Custom page header */
 .header {
@@ -328,7 +328,6 @@ h1 {
   p {
     font-size: 0.7em;
   }
-  
   h1 {
     font-size: 3.4rem;
   }
@@ -340,8 +339,7 @@ h1 {
   }
   .nav-link {
     font-size: 0.8em;
-    height: auto;
-   
+    height: auto;   
     text-align: center;  
   }
   .quantity_infos, #color_infos {    
@@ -349,9 +347,7 @@ h1 {
   }
   .subtotal_item p, .subtotal_item a {
     font-size: 0.55rem;
-    
   }
-  
 }
 
 @media (min-width: 576px) {
@@ -370,9 +366,7 @@ h1 {
   .nav {
     width: 100%;
   }
-  }
-
-
+}
 
 @font-face {
   font-family: 'Belligerent-Madness';
