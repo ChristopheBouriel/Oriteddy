@@ -2,7 +2,7 @@ function checkNew() {
     let check = parseFloat(localStorage.isNew);
     console.log(check);
     if( check == 1) {
-        let message = document.getElementById('message_order');
+        const message = document.getElementById('message_order');
         message.innerHTML = '<p>Votre demande a bien été prise en compte</p><p>Merci de votre confiance !</p>'
         buildNewOrder();
     }
@@ -12,7 +12,7 @@ function checkNew() {
 }
 
 function buildNewOrder() {
-    let orderNumber = document.getElementById('order_number');
+    const orderNumber = document.getElementById('order_number');
     orderNumber.classList.add('order_view');   
     orderNumber.innerHTML = 
     '<div class="mt-2 ml-3"><p class="mb-1">Votre numéro de commande : </p><p>' + localStorage.idOrder + '</p></div>';
@@ -28,10 +28,10 @@ checkNew();
 //localStorage.setItem("isNew", 1);
 
 function askInfos() {
-
-    let message = document.getElementById('user_infos');
-        message.innerHTML = '<p class="text-center" id="initial_message">Veuillez remplir les champs suivants afin que nous retrouvions votre dernière commande' +
-        '<form id="form_2" onsubmit="return searchOrder()">' +
+    const message = document.getElementById('user_infos');
+        message.innerHTML = 
+        '<p class="text-center" id="initial_message">Veuillez remplir les champs suivants afin que nous tentions de retrouver votre dernière commande'
+         + '<form id="form_2" onsubmit="return searchOrder()">' +
   '<div class="form-group">' +
       '<label for="firstname">Prenom</label>' +
       '<input id="firstname" class="form-control" required type="text"/></div>' +
@@ -56,8 +56,8 @@ function searchOrder() {
         let message = document.getElementById('message_order');
         message.innerHTML = '<p>Nous n\'avons pas trouvé de commande récente à ce nom effectuée depuis ce navigateur</p>'
         + '<p>Veuillez vérifier les informations que vous avez saisies</p>';
-        let suppress = document.getElementById('initial_message');        
-        let remove = document.getElementById('user_infos');
+        const suppress = document.getElementById('initial_message');        
+        const remove = document.getElementById('user_infos');
         remove.removeChild(suppress);            
     }
     else {
@@ -76,18 +76,17 @@ function buildOldOrder(checkOrder) {
     let lastResume = lastOrder[1];
     console.log(lastResume);
     let oldOrder = false;
-    let message = document.getElementById('message_order');
+    const message = document.getElementById('message_order');
     message.innerHTML = '<p>Votre dernière commande effectuée portant le numéro :</p><p>' + lastOrder[0] + '</p>';
-    let suppress = document.getElementById('order_number');        
-    let remove = document.getElementById('order_infos');
+    const suppress = document.getElementById('order_number');        
+    const remove = document.getElementById('order_infos');
     remove.removeChild(suppress); 
     writeResume(lastResume, oldOrder);         
 }
 
 function writeResume(resume, newOrder) {
-    let totalOrder = 0;
-    let teddyLine = '';
-    let showResume = '';
+    let totalOrder = 0; 
+    let teddyLine, showResume;
     for(let teddy of resume) {
         totalOrder = totalOrder + teddy[3];
         showResume = document.createElement('div');
@@ -98,7 +97,8 @@ function writeResume(resume, newOrder) {
         '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-4">'
         + teddy[0] + '</p><p class="col-3 text-left">Prix : '+ convertCents(teddy[2]) + ' €</p><p class="col-3 text-center">Quantité</p>'
         + '<p class="subtotal col-2 text-right">Montant</p></div><div class="row no-gutters make_subtotal">'
-        + '<p class="col-7 ref_teddy">ref : ' + teddy[4] + '</p><p class="col-3 text-center">' + teddy[1] + '</p><p class="subtotal col-2 text-right">' + convertCents(teddy[3]) + ' €</p></div></div>';
+        + '<p class="col-7 ref_teddy">ref : ' + teddy[4] + '</p>'
+        + '<p class="col-3 text-center">' + teddy[1] + '</p><p class="subtotal col-2 text-right">' + convertCents(teddy[3]) + ' €</p></div></div>';
 
         if(newOrder === true) {
             localStorage.setItem(teddy[4], '');
@@ -106,10 +106,10 @@ function writeResume(resume, newOrder) {
             localStorage.setItem('totalArticles', '');
         }        
     }
-    let showTotal = document.getElementById('show_total');
+    const showTotal = document.getElementById('show_total');
     showTotal.classList.add('order_view');        
     showTotal.innerHTML = '<p class="col-8 pt-2">Montant total : </p><p class="col-4 pt-2 text-right">' + convertCents(totalOrder) + ' €</p>';
-    let suppress = document.getElementById('user_infos');        
-    let remove = document.getElementById('order_infos');
+    const suppress = document.getElementById('user_infos');        
+    const remove = document.getElementById('order_infos');
     remove.removeChild(suppress);     
 }

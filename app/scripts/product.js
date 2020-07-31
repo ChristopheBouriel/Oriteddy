@@ -10,7 +10,7 @@ let item = 0;
 function getOneTeddyInfos (infosTeddy) {    
     const teddyView = document.createElement('div');
     teddyView.classList.add('teddy_item_view', 'text-center', 'mt-md-5');
-    let teddyInfos = document.getElementById('teddy_view');
+    const teddyInfos = document.getElementById('teddy_view');
     teddyInfos.appendChild(teddyView);
     teddyView.innerHTML = '<p class="font-weight-bold mt-3">' + infosTeddy.name + '</p>'
         + '<img src=' + infosTeddy.imageUrl + '>'
@@ -18,14 +18,15 @@ function getOneTeddyInfos (infosTeddy) {
         + '<p>' + infosTeddy.description + '</p>';
     const teddyViewNav = document.createElement('div');
     teddyViewNav.classList.add('teddy_view_nav');
-    let teddyNavButtons = document.getElementById('teddy_view');
+    const teddyNavButtons = document.getElementById('teddy_view');
     teddyNavButtons.appendChild(teddyViewNav);
-    teddyViewNav.innerHTML = '<p><a href="index.html#' + infosTeddy.name + '"><div class="back_to_list"><i class="fas fa-paw"></i><p>Retour</p></div></a></p>';
+    teddyViewNav.innerHTML = '<p><a href="index.html#' + infosTeddy.name + '">'
+     + '<div class="back_to_list"><i class="fas fa-paw"></i><p>Retour</p></div></a></p>';
 
-    let initColor = document.getElementById('color_choice');
+    const initColor = document.getElementById('color_choice');
     initColor.innerHTML = infosTeddy.colors[0];
     addItems[0] = infosTeddy.colors[0];
-    let showQuantity = document.getElementById('quantity_choice');
+    const showQuantity = document.getElementById('quantity_choice');
     showQuantity.innerHTML = item;
     let teddyColors = infosTeddy.colors;
     showColors(teddyColors);
@@ -33,8 +34,7 @@ function getOneTeddyInfos (infosTeddy) {
 
 //affichage des couleurs dans le menu déroulant et sélection
 function showColors(teddyColors) {
-    let addNewColor = '';
-    let newColor = '';
+    let addNewColor, newColor;
     for (let colorName of teddyColors) {
         newColor = document.createElement('a')            
         newColor.classList.add('dropdown-item');
@@ -43,9 +43,7 @@ function showColors(teddyColors) {
         addNewColor.appendChild(newColor);
         newColor.innerHTML = colorName;        
     };
-    let itemColor = '';
-    let showColor = '';
-    let showQuantity = '';
+    let itemColor, showColor, showQuantity;
     for (let colorOption of teddyColors) { 
         itemColor = document.getElementById (colorOption); 
         itemColor.addEventListener('click', function() {
@@ -63,14 +61,14 @@ function showColors(teddyColors) {
 //sélection du nombre désiré dans la couleur affichée --> ajouter
 function addOne() {
     const plus = document.getElementById ('add');
-    plus.addEventListener('click', function(event) {
-    event.preventDefault();       
-    item++;      
-    console.log(item);
-    const showQuantity = document.getElementById('quantity_choice');
-    showQuantity.innerHTML = item;
-    addItems[1] = item;
-    });
+        plus.addEventListener('click', function(event) {
+        event.preventDefault();       
+        item++;      
+        console.log(item);
+        const showQuantity = document.getElementById('quantity_choice');
+        showQuantity.innerHTML = item;
+        addItems[1] = item;
+        });
     console.log(addItems);
 }
 
@@ -82,11 +80,11 @@ function removeOne() {
         if (item>0) {
             item--;           
             console.log(item);
-            let showQuantity = document.getElementById('quantity_choice');
+            const showQuantity = document.getElementById('quantity_choice');
             showQuantity.innerHTML = item;
             addItems[1] = item;
             }
-    });
+        });
     console.log(addItems);   
 }
 
@@ -120,13 +118,13 @@ function addBasket(infos) {
         localStorage.setItem('totalArticles', allArticles);
         showTotalArticles();
         addItems = [];
-        let showQuantity = document.getElementById('quantity_choice');
+        const showQuantity = document.getElementById('quantity_choice');
         showQuantity.innerHTML = 0;
     });
 };
 
 function showTotalArticles() {
-    let totalArticles = document.getElementById('total_articles');
+    const totalArticles = document.getElementById('total_articles');
     let checkBasket = localStorage.getItem('totalArticles');
     if(isNaN(checkBasket) === true) {
         checkBasket = 0;
@@ -134,13 +132,13 @@ function showTotalArticles() {
     checkBasket = parseFloat(checkBasket);
     console.log(checkBasket);
     if(checkBasket != 0) {
-      totalArticles.innerHTML = localStorage.getItem('totalArticles');
-      console.log('zut');
+        totalArticles.innerHTML = localStorage.getItem('totalArticles');
+        console.log('zut');
     }
     else {
-      let totalArticles = document.getElementById('total_articles');
-      totalArticles.innerHTML = '';
-      console.log('put');
+        const totalArticles = document.getElementById('total_articles');
+        totalArticles.innerHTML = '';
+        console.log('put');
     }
 }
 

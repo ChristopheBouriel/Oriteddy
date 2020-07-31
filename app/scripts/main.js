@@ -4,7 +4,7 @@ function getAllTeddiesInfos() {
 }
 
 function showTotalArticles() {
-    let totalArticles = document.getElementById('total_articles');
+    const totalArticles = document.getElementById('total_articles');
     let checkBasket = localStorage.getItem('totalArticles');
     checkBasket = parseFloat(checkBasket);
     console.log(checkBasket);
@@ -13,7 +13,7 @@ function showTotalArticles() {
       console.log('zut');
     }
     else {
-      let totalArticles = document.getElementById('total_articles');
+      const totalArticles = document.getElementById('total_articles');
       totalArticles.innerHTML = '';
       console.log('put');
     }
@@ -25,9 +25,7 @@ function convertCents(priceCent) {
 }
 
 function readList(list) {
-    let teddyList = '';
-    let testId = '';
-    let newTeddy = '';
+    let teddyList, testId, newTeddy;
     for (let teddy of list) {
         newTeddy = document.createElement('div');
         newTeddy.classList.add('teddy_item_list', 'text-center', 'card', 'product', 'my-5');
