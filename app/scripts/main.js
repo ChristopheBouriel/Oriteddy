@@ -6,6 +6,9 @@ function getAllTeddiesInfos() {
 function showTotalArticles() {
     const totalArticles = document.getElementById('total_articles');
     let checkBasket = localStorage.getItem('totalArticles');
+    if(isNaN(checkBasket) === true) {
+      checkBasket = 0;
+    };
     checkBasket = parseFloat(checkBasket);
     console.log(checkBasket);
     if(checkBasket != 0) {
@@ -32,9 +35,9 @@ function readList(list) {
         newTeddy.id = teddy.name;           
         teddyList = document.getElementById('teddies_list');
         teddyList.appendChild(newTeddy);
-        newTeddy.innerHTML = '<p class="font-weight-bold mt-3">' + teddy.name + '</p>'
+        newTeddy.innerHTML = '<p class="font-weight-bold teddy_name mt-3">' + teddy.name + '</p>'
               + '<img src=' + teddy.imageUrl + '>'
-               + '<p class="mt-3">' + convertCents(teddy.price) + ' €' + '</p>'
+               + '<p class="mt-3 font-weight-bold teddy_price">' + convertCents(teddy.price) + ' €' + '</p>'
                 + '<a href="oribear-item.html?' + teddy._id + '" class="stretched-link mb-2">Cliquer pour voir plus</a>';       
         testId =  localStorage.getItem(teddy._id);
         console.log(testId);

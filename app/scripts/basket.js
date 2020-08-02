@@ -109,9 +109,9 @@ function showNumberColorEach(colorNumberTable) {
         teddyList = document.getElementById('see_basket');
         teddyList.appendChild(newTeddyOrderColor);
         newTeddyOrderColor.innerHTML = '<div class="item_color_infos"><div id="plus_less_one_'
-        + y[2] + y[0] +'"> <div class="container"><div class="make_subtotal row no-gutters title_line"><p class="col-4">Article</p><p class="col-3">Prix</p>' 
+        + y[2] + y[0] +'"> <div class="container-fluid"><div class="make_subtotal row no-gutters title_line"><p class="col-4">Article</p><p class="col-3">Prix</p>' 
         + '<p class="col-3">Quantité</p><p class="col-2 text-right">Montant</p></div>'
-        + '<div class="make_subtotal row no-gutters"><p class="col-4 pr-1">' + y[2] + '  ' + y[0] + '</p>'
+        + '<div class="make_subtotal row no-gutters infos_line"><p class="col-4 pr-1">' + y[2] + '  ' + y[0] + '</p>'
         + '<p class="col-3 price">' + convertCents(y[3]) + ' €</p>' + '<p class="col-3 quantity">' + y[1] + '</p>'
         + '<p class="subtotal col-2 text-right">' + convertCents(y[1]*y[3]) + ' €</p></div></div></div>'
         
@@ -132,7 +132,7 @@ function showNumberEach(teddyName, teddyPrice, totalTeddy, idItem) {
     newTeddyOrder.id = teddyName;
     const teddiesList = document.getElementById('see_basket');
     teddiesList.appendChild(newTeddyOrder);
-    newTeddyOrder.innerHTML = '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-7">'
+    newTeddyOrder.innerHTML = '<div class="container-fluid subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-7">'
     + teddyName + '</p><p class="col-3">Quantité</p>'
     + '<p class="subtotal col-2 text-right">Montant</p></div><div class="row no-gutters make_subtotal">'
     + '<a class="col-7 back_button" href="oribear-item.html?' + idItem + '">Revoir l\'article</a>'
@@ -287,8 +287,8 @@ function resetBasket() {
 function modifyLignColorEach(readColorNumberEach, listenBasket) {
     const rewriteOne = document.getElementById ('plus_less_one_' + listenBasket);
     rewriteOne.innerHTML = '<div class="item_color_infos"><div id="plus_less_one_' + readColorNumberEach[2] + readColorNumberEach[0] +'">'
-    + '<div class="container"><div class="make_subtotal row no-gutters title_line"><p class="col-4">Article</p><p class="col-3">Prix</p>' 
-    + '<p class="col-3">Quantité</p><p class="col-2 text-right">Montant</p></div><div class="make_subtotal row no-gutters">'
+    + '<div class="container-fluid"><div class="make_subtotal row no-gutters title_line"><p class="col-4">Article</p><p class="col-3">Prix</p>' 
+    + '<p class="col-3">Quantité</p><p class="col-2 text-right">Montant</p></div><div class="make_subtotal row no-gutters infos_line">'
     + '<p class="col-4 pr-1">' + readColorNumberEach[2] + '  ' + readColorNumberEach[0] + '</p>'
     + '<p class="col-3">' + convertCents(readColorNumberEach[3]) + ' €</p><p class="col-3">' + readColorNumberEach[1]
     + '</p><p class="subtotal col-2 text-right">' + convertCents(readColorNumberEach[1]*readColorNumberEach[3]) + ' €</p></div></div></div>';
@@ -297,7 +297,7 @@ function modifyLignColorEach(readColorNumberEach, listenBasket) {
 //modification du sous-total concerné par ajout ou suppression
 function modifyLignEach(newTotalTeddy, teddyName) {
     const changeSubtotal = document.getElementById (teddyName);
-    changeSubtotal.innerHTML = '<div class="container subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-7">'
+    changeSubtotal.innerHTML = '<div class="container-fluid subtotal_item"><div class="row no-gutters make_subtotal"><p class="col-7">'
     + newTotalTeddy[0] + '</p><p class="col-3">Quantité</p>'
     + '<p class="subtotal col-2 text-right">Montant</p></div><div class="row no-gutters make_subtotal">'
     + '<a class="col-7 back_button" href="oribear-item.html?' + newTotalTeddy[4] + '">Revoir l\'article</a><p class="col-3">' + newTotalTeddy[1] + '</p>'

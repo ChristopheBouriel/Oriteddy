@@ -9,12 +9,12 @@ let addItems = {};
 let item = 0;
 function getOneTeddyInfos (infosTeddy) {    
     const teddyView = document.createElement('div');
-    teddyView.classList.add('teddy_item_view', 'text-center', 'mt-md-5');
+    teddyView.classList.add('teddy_item_view', 'text-center', 'mt-md-2');
     const teddyInfos = document.getElementById('teddy_view');
     teddyInfos.appendChild(teddyView);
-    teddyView.innerHTML = '<p class="font-weight-bold mt-3">' + infosTeddy.name + '</p>'
+    teddyView.innerHTML = '<p class="font-weight-bold teddy_name mt-3">' + infosTeddy.name + '</p>'
         + '<img src=' + infosTeddy.imageUrl + '>'
-        + '<p class="mt-3">' + convertCents(infosTeddy.price) + ' €' + '</p>'
+        + '<p class="mt-3 font-weight-bold teddy_price">' + convertCents(infosTeddy.price) + ' €' + '</p>'
         + '<p>' + infosTeddy.description + '</p>';
     const teddyViewNav = document.createElement('div');
     teddyViewNav.classList.add('teddy_view_nav');
@@ -109,17 +109,18 @@ function addBasket(infos) {
         }
         let allArticles = localStorage.getItem('totalArticles');
         
+        allArticles = parseFloat(allArticles);
         if(isNaN(allArticles) === true) {
             allArticles = 0;
         };
-        allArticles = parseFloat(allArticles);
         let adds = addItems[1];            
         allArticles = allArticles + adds;            
         localStorage.setItem('totalArticles', allArticles);
         showTotalArticles();
-        addItems = [];
+        addItems[1] = 0;
         const showQuantity = document.getElementById('quantity_choice');
         showQuantity.innerHTML = 0;
+        item = 0;
     });
 };
 

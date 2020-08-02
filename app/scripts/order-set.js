@@ -30,7 +30,7 @@ checkNew();
 function askInfos() {
     const message = document.getElementById('user_infos');
         message.innerHTML = 
-        '<p class="text-center" id="initial_message">Veuillez remplir les champs suivants afin que nous tentions de retrouver votre dernière commande'
+        '<p class="text-center px-2" id="initial_message">Veuillez remplir les champs suivants afin que nous tentions de retrouver votre dernière commande'
          + '<form id="form_2" onsubmit="return searchOrder()">' +
   '<div class="form-group">' +
       '<label for="firstname">Prenom</label>' +
@@ -54,8 +54,8 @@ function searchOrder() {
     console.log(checkOrder);
     if(checkOrder === null) {
         let message = document.getElementById('message_order');
-        message.innerHTML = '<p>Nous n\'avons pas trouvé de commande récente à ce nom effectuée depuis ce navigateur</p>'
-        + '<p>Veuillez vérifier les informations que vous avez saisies</p>';
+        message.innerHTML = '<p class="px-2">Nous n\'avons pas trouvé de commande récente à ce nom effectuée depuis ce navigateur</p>'
+        + '<p class="px-3">Veuillez vérifier les informations que vous avez saisies</p>';
         const suppress = document.getElementById('initial_message');        
         const remove = document.getElementById('user_infos');
         remove.removeChild(suppress);            
@@ -77,7 +77,7 @@ function buildOldOrder(checkOrder) {
     console.log(lastResume);
     let oldOrder = false;
     const message = document.getElementById('message_order');
-    message.innerHTML = '<p>Votre dernière commande effectuée portant le numéro :</p><p>' + lastOrder[0] + '</p>';
+    message.innerHTML = '<p class="px-2">Votre dernière commande effectuée portant le numéro :</p><p>' + lastOrder[0] + '</p>';
     const suppress = document.getElementById('order_number');        
     const remove = document.getElementById('order_infos');
     remove.removeChild(suppress); 

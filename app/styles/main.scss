@@ -12,6 +12,10 @@
   color:#897294; 
 }
 
+.nav-link:hover {
+  color: #637bb7;  
+}
+
 .nav-item {
   width: 33%;
 }
@@ -20,10 +24,24 @@
   width: 70%;
 }
 
+a, a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  outline: none;
+}
+
+p {
+  color: #5c4147;
+}
+
 .there {
   border: solid 1px #897294;
   background-color: #897294;
   color: white;
+}
+
+.there:hover {
+    color: #ffffff;
 }
 
 i {
@@ -73,6 +91,7 @@ i {
   font-size: 3rem;
   color: #637bb7;
   background-color: white;
+  animation: shake 3000ms infinite;
 }
 
 .back_to_list {
@@ -88,10 +107,6 @@ i {
 .teddy_view_nav {
   display: flex; 
   align-self: center;
-  margin-top: 10px;
-}
-
-.basket_stuff {  
   margin-top: 10px;
 }
 
@@ -116,13 +131,22 @@ i {
   margin: auto;
 }
 
-.basket_stuff .btn {
+.basket_stuff {  
+  max-width: 95%;  
+  margin: auto;
+  .btn {
   width: 242px;
+  }
+}
+
+.btn:hover {
+  color: white;
 }
 
 .quantity_infos {
   display: flex;
-  justify-content: flex-end; 
+  justify-content: flex-end;
+  
 }
 
 .quantity_infos a {
@@ -137,6 +161,10 @@ i {
   margin-left: 5px;
 }
 
+.quantity_infos a:hover {
+  color: #ffffff;
+}
+
 .quantity_title {
   background-color: #007bff;
   width: 107px;
@@ -148,12 +176,10 @@ i {
   font-size: 1em;
 }
 
-.basket_stuff {
-  max-width: 95%;  
-  margin: auto;
-}
-
 .remove_all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #007bff;
   width: 140px;
   height: 40px;
@@ -168,7 +194,7 @@ i {
 
 .modify_number_basket {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding-left: 10px;
 }
@@ -188,44 +214,22 @@ i {
 
 .subtotal_item p {
   color : #494647;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .make_subtotal {
   font-size: 0.8rem;
-  text-align: start;
 }
 
 .title_line p {
     margin-bottom: 0px;
     color: black;
     font-weight: 400;
-}  
+    font-size: 0.9rem;
+} 
 
-a, a:hover {
-  color: #ffffff;
-  text-decoration: none;
-  outline: none;
-}
-
-.quantity_infos a:hover {
-    color: #ffffff;
-}
-
-.nav-link:hover {
-  color: #637bb7;  
-}
-
-.there:hover {
-    color: #ffffff;
-}
-
-.btn:hover {
-  color: white;
-}
-
-p {
-  color: #774d57;
+.infos_line p {
+  font-size: 0.9rem;
 }
 
 #color_choice, #quantity_choice {
@@ -255,6 +259,10 @@ p {
 
 .form-group {
   padding: 0px 10px 0px 10px;
+}
+
+input:invalid {
+  box-shadow: 0 0 5px 1px #b64242;
 }
 
 .order_infos {
@@ -291,11 +299,7 @@ p {
   border: #646464 solid 2px;
 }
 
-input:invalid {
-  box-shadow: 0 0 5px 1px #b64242;
-}
 
-/* Space out content a bit */
 body {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -303,7 +307,6 @@ body {
   margin: auto;
 }
 
-/* Custom page header */
 .header {
   padding-bottom: 1rem;
   border-bottom: 2px solid #897294;
@@ -312,17 +315,61 @@ body {
   margin: 0rem auto 1rem auto;
 }
 
-/* Custom page footer */
+main {
+  margin-bottom: 40px;
+}
+
 .footer {
+  display: flex;
+  align-items: center;
   padding-top: 1.5rem;
-  color: rgb(253, 232, 37);
+  
   border-top: .1rem solid #e5e5e5;
+  p {
+    font-size: 1.5rem;
+  }
 }
 
 h1 { 
   font-family: 'Belligerent-Madness';
   font-size: 7rem;
-}  
+}
+
+h3 {
+  color: #897294;
+}
+
+.teddy_name {
+  font-family: 'Belligerent-Madness';
+  font-size: xx-large;
+}
+
+.teddy_price {
+  font-size: 1.4rem;
+}
+
+@media (min-width:990px)
+{
+  h1 {
+    font-size: 8.5rem;
+  }
+  .nav-link {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .teddy_name {
+    font-size: 3.5rem;
+  }
+  .nav-link {
+    font-size: 1.2em;
+  }
+  footer h3,p
+  {
+    font-size: 1.2rem;
+  }
+}
 
 @media (max-width: 576px) {
   p {
@@ -339,32 +386,66 @@ h1 {
   }
   .nav-link {
     font-size: 0.8em;
-    height: auto;   
-    text-align: center;  
   }
   .quantity_infos, #color_infos {    
     justify-content: center;
   }
-  .subtotal_item p, .subtotal_item a {
+  .subtotal_item a, .make_subtotal p {
     font-size: 0.55rem;
+  }
+
+ .remove_all {
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .modify_number_basket .quantity_infos {
+    a {
+      width: 30px;
+      height: 30px;
+      font-size: 1.0rem;
+    }
+  }
+
+  footer h3,p
+  {
+    font-size: 1rem;
+  }
+  .infos_leg {
+    p {
+      font-size: 0.8rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+    }
+    h3 {
+      font-size: 1rem;
+    }
   }
 }
 
 @media (min-width: 576px) {
   .teddy_item_order_color {
     margin: 0px 15px 5px 15px;  
-    padding: 5px 10px 0px 0px;
+    padding: 5px 0px 0px 0px;
   }
 
   .teddy_item_order {
     margin: 0px 15px 25px 15px;  
-    padding: 5px 10px 0px 0px;    
+    padding: 5px 0px 0px 0px;    
   }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
   .nav {
     width: 100%;
+  }
+  .btn {
+    max-width: 98%;
+  }
+  footer h3,p
+  {
+    font-size: 1rem;
   }
 }
 
@@ -376,4 +457,58 @@ h1 {
       url('../Fonts/Belligerent-Madness.ttf.eot?#iefix') format('embedded-opentype'); 
   font-weight: normal;
   font-style: normal;
+}
+
+@keyframes shake {
+  2% {
+    transform: rotate(6deg) translateX(2%);
+  }
+  4% {
+    transform: rotate(-6deg) translateX(-2%);
+  }
+  6% {
+    transform: rotate(6deg) translateX(4%);
+  }
+  8% {
+    transform: rotate(-6deg) translateX(-4%);
+  }
+  10% {
+    transform: rotate(6deg) translateX(2%);
+  }
+  12% {
+    transform: rotate(-6deg) translateX(-2%);
+  }
+  14% {
+    transform: rotate(0deg) translateX(0%);
+  }
+}
+
+
+.infos_leg
+{
+  max-width: 80%;
+  margin: auto;
+  margin-bottom: 140px;
+  font-size: large;
+  a {
+    color: #897294;
+  }
+
+  h3 {
+    margin-top: 40px;
+    padding: 7px;
+    /*color: $page-text-color;
+    background-color: $page-color;*/
+    border-radius: 5px;
+  }
+
+  h2 {
+    text-align: center;
+    color: gray;
+  }
+
+  span {
+    color: #897294;
+    font-weight: bold;
+  }
 }
