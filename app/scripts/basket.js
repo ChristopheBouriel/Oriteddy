@@ -3,21 +3,21 @@ function getAllTeddiesInfos() {
 }
 
 //variables globales nécessaires à la gestion du panier et des modifications éventuelles de celui-ci
-let idItemsTab = []; //tableau des id des produits
+const idItemsTab = []; //tableau des id des produits
 let totalOrder = 0; //montant total de la commande
 let totalTeddiesOrder = 0; //nombre total d'articles
-let removeBasketTable = []; //tableau des produits affichés initialement et donc susceptibles d'être ôtés
-let colorNumberTableAll = []; //tableau de tableaux de chaque teddy, chacun contenant les tableaux de chaque variante de couleur,
+const removeBasketTable = []; //tableau des produits affichés initialement et donc susceptibles d'être ôtés
+const colorNumberTableAll = []; //tableau de tableaux de chaque teddy, chacun contenant les tableaux de chaque variante de couleur,
                             //permettant de garder toutes les informations de manière structurée et de les actualiser
-let totalTeddyItems = []; //tableau des différents modèles avec notamment le nombre total de chaque, toutes couleurs confondues
-let finalOrder = []; //tableau simple de toutes les variantes de teddies, modèle ET couleur,
+const totalTeddyItems = []; //tableau des différents modèles avec notamment le nombre total de chaque, toutes couleurs confondues
+const finalOrder = []; //tableau simple de toutes les variantes de teddies, modèle ET couleur,
                     // afin de gérer simplement la supression totale d'une variante et la réécriture du panier
 
 getAllTeddiesInfos();
 
 //écriture du tableau des id
 function makeIdTab(infos) {
-    let idItem = '';
+    let idItem;
     for (let teddy of infos) {
         console.log(teddy);
         idItem = teddy._id;
@@ -32,17 +32,17 @@ function makeIdTab(infos) {
 function getBasicListFromStorage(idItemsTab) {
     console.log(colorNumberTableAll);
     //possible de déclarer colorNumberTableAll ici et le passer en paramètre à makeListByColorItem(), removeTeddyColorAll(), removeOneItem(), addOneItem();
-    let itemsTab = '';
-    let itemsTabObj = '';
+    
     let totalTeddyList = [];
+    let itemsTab;
     for (let idItem of idItemsTab) {
         itemsTab = localStorage.getItem(idItem);    
-        itemsTab = itemsTab.substring(0,itemsTab.length-1);
-        itemsTabObj = '[' + itemsTab + ']';
-        console.log(itemsTab);
-        totalTeddyList = JSON.parse(itemsTabObj);
-        console.log(totalTeddyList);    
-        makeListByColorItem(totalTeddyList, idItem);    
+        if(itemsTab.length != 0) {
+            totalTeddyList = JSON.parse(itemsTab);
+            console.log(totalTeddyList);    
+            makeListByColorItem(totalTeddyList, idItem);
+        }
+        console.log(itemsTab);  
     };
     makeTotal();
     createTotalLign();
@@ -56,8 +56,8 @@ function getBasicListFromStorage(idItemsTab) {
 //constitution de la liste des articles sans répétition de modèles d'une même couleur (contrôle)
 function makeListByColorItem(totalTeddyList, idItem) {
     let totalTeddy = 0;
-    let colorNumberTable = [];
-    let colorTable = [];
+    const colorNumberTable = [];
+    const colorTable = [];
     let countInfos, numberEachColor, teddyName, teddyColor, teddyPrice, colorCheck, colorInTable, colorNumberTableItem;
     for (let readNumberEachColor of totalTeddyList) {            
         if (totalTeddyList != []) {        
@@ -66,9 +66,9 @@ function makeListByColorItem(totalTeddyList, idItem) {
             numberEachColor = countInfos[2];
             teddyColor = countInfos[1];
             teddyPrice = countInfos[3];
-            teddyPrice = parseFloat(teddyPrice);
+            teddyPrice = parseInt(teddyPrice);
             teddyName = countInfos[0];
-            numberEachColor = parseFloat(numberEachColor);
+            numberEachColor = parseInt(numberEachColor);
             totalTeddy = totalTeddy + numberEachColor;                
             colorCheck = colorTable.includes(teddyColor);                    
                 if (colorCheck === false) {                            
@@ -254,20 +254,27 @@ function removeTeddyColorAll() {
     }
 }
 
-//modification du panier en cas de retour à l'accueil et aux pages produit
-function newBasket(teddyId) {
-    let constStringItem = '';
-    for (let constString of finalOrder) {
-        if (constString[1] != 0 && constString[4] == teddyId) {
-            let constObj =  '"name":"' + constString[2] + '",'
-            + '"color":"' +  constString[0] + '",'
-            + '"nombre":' + constString[1] + ','
-            + '"price":' + constString[3];
-            constObj = '{' + constObj +'},';
-            constStringItem = constStringItem + constObj;                     
-        }
-    localStorage.setItem(teddyId, constStringItem); 
+class OrderTeddy {
+    constructor (name, color, number, price) {
+        this.name = name;
+        this.color = color;
+        this.number = number;
+        this.price = price;
     }
+}
+
+//modification du panier en cas de retour à l'accueil et aux pages produit et commande
+function newBasket(teddyId) {
+    let allOfThisItem = [];
+    let newItemBasket;
+    for (let constObjTeddy of finalOrder) {
+        if (constObjTeddy[1] != 0 && constObjTeddy[4] == teddyId) {
+            newItemBasket = new OrderTeddy(constObjTeddy[2], constObjTeddy[0], constObjTeddy[1], constObjTeddy[3]);
+            allOfThisItem.push(newItemBasket);
+        }
+    }
+    allOfThisItem = JSON.stringify(allOfThisItem);
+    localStorage.setItem(teddyId, allOfThisItem);
 }
 
 //vider totalement le panier et retourner à l'accueil
@@ -384,7 +391,7 @@ function addOneItem() {
 }
 
 function convertCents(priceCent) {
-    let priceEuro = priceCent/100;
+    const priceEuro = priceCent/100;
     return priceEuro;
 }
 
@@ -407,12 +414,12 @@ class Order {
 //création de l'objet "contact"
 function makeContact() {
     if(totalOrder != 0) {
-        let firstName = $('#firstname').val();
-        let lastName = $('#lastname').val();
-        let address = $('#address').val();
-        let city = $('#city').val();
-        let email = $('#email').val();
-        let currentUser = new User(firstName, lastName, address, city, email);
+        const firstName = $('#firstname').val();
+        const lastName = $('#lastname').val();
+        const address = $('#address').val();
+        const city = $('#city').val();
+        const email = $('#email').val();
+        const currentUser = new User(firstName, lastName, address, city, email);
         console.log(currentUser);
         makeIdList(currentUser);
         return false;
@@ -433,7 +440,7 @@ function makeIdList(currentUser) {
 
 //écriture du body de la requête à l'API
 function makeBodyPost(currentUser, idList) {
-    let obj = new Order (currentUser, idList)
+    const obj = new Order (currentUser, idList)
     console.log(obj);
     if(totalOrder != 0) {
         sendOrder(obj);
@@ -456,8 +463,8 @@ function sendOrder(obj) {
 //récupération et stockage des infos nécessaires à la gestion de l'affichage de la page "Commande"
 function prepareConfirmation(confirmedOrder) {
     console.log(confirmedOrder);
-    let infos = Object.values(confirmedOrder);
-    let orderNumber = infos[2];
+    const infos = Object.values(confirmedOrder);
+    const orderNumber = infos[2];
     console.log(orderNumber);
     localStorage.setItem('idOrder', orderNumber);
     console.log(localStorage.idOrder);
@@ -465,10 +472,10 @@ function prepareConfirmation(confirmedOrder) {
     localStorage.setItem('isNew', 1);
     console.log(localStorage.isNew);
 
-    let a = Object.values(infos[0]);
-    let idUser = a[0] + a[1];
+    const a = Object.values(infos[0]);
+    const idUser = a[0] + a[1];
     console.log(idUser);
-    let lastOrder = {"orderId": infos[2], "saveOrder": JSON.parse(localStorage.orderResume)};
+    const lastOrder = {"orderId": infos[2], "saveOrder": JSON.parse(localStorage.orderResume)};
     localStorage.setItem(idUser,JSON.stringify(lastOrder));
     console.log(localStorage.getItem(idUser));
     goToOrder();

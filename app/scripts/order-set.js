@@ -1,5 +1,5 @@
 function checkNew() {
-    let check = parseFloat(localStorage.isNew);
+    const check = parseInt(localStorage.isNew);
     console.log(check);
     if( check == 1) {
         const message = document.getElementById('message_order');
@@ -16,9 +16,9 @@ function buildNewOrder() {
     orderNumber.classList.add('order_view');   
     orderNumber.innerHTML = 
     '<div class="mt-2 ml-3"><p class="mb-1">Votre numéro de commande : </p><p>' + localStorage.idOrder + '</p></div>';
-    let resume = JSON.parse(localStorage.orderResume);
+    const resume = JSON.parse(localStorage.orderResume);
     console.log(resume);
-    let newOrder = true;
+    const newOrder = true;
     localStorage.setItem('isNew', 0);
     writeResume(resume, newOrder);
 }
@@ -34,10 +34,10 @@ function askInfos() {
          + '<form id="form_2" onsubmit="return searchOrder()">' +
   '<div class="form-group">' +
       '<label for="firstname">Prenom</label>' +
-      '<input id="firstname" class="form-control" required type="text"/></div>' +
+      '<input id="firstname" class="form-control" required type="text" pattern="[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F \'-]{2,30}"/></div>' +
   '<div class="form-group">' +
       '<label for="lastname">Nom</label>' +
-      '<input id="lastname" class="form-control" required type="text"/></div>' +
+      '<input id="lastname" class="form-control" required type="text" pattern="[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F \'-]{2,40}"/></div>' +
   '<div class="form-group">' +
       '<label for="email">Adresse email</label>' +
       '<input id="email" class="form-control" type="email" name="adresse_mail" required /></div>' +
@@ -46,14 +46,14 @@ function askInfos() {
 }
 
 function searchOrder() {
-    let firstName = $('#firstname').val();
-    let lastName = $('#lastname').val();
-    let checkUser = firstName + lastName;        
+    const firstName = $('#firstname').val();
+    const lastName = $('#lastname').val();
+    const checkUser = firstName + lastName;        
     let checkOrder = localStorage.getItem(checkUser);
     checkOrder = JSON.parse(checkOrder);
     console.log(checkOrder);
     if(checkOrder === null) {
-        let message = document.getElementById('message_order');
+        const message = document.getElementById('message_order');
         message.innerHTML = '<p class="px-2">Nous n\'avons pas trouvé de commande récente à ce nom effectuée depuis ce navigateur</p>'
         + '<p class="px-3">Veuillez vérifier les informations que vous avez saisies</p>';
         const suppress = document.getElementById('initial_message');        
@@ -67,15 +67,15 @@ function searchOrder() {
 }
 
 function convertCents(priceCent) {
-    let priceEuro = priceCent/100;
+    const priceEuro = priceCent/100;
     return priceEuro;
 }
 
 function buildOldOrder(checkOrder) {    
-    let lastOrder = Object.values(checkOrder)
-    let lastResume = lastOrder[1];
+    const lastOrder = Object.values(checkOrder)
+    const lastResume = lastOrder[1];
     console.log(lastResume);
-    let oldOrder = false;
+    const oldOrder = false;
     const message = document.getElementById('message_order');
     message.innerHTML = '<p class="px-2">Votre dernière commande effectuée portant le numéro :</p><p>' + lastOrder[0] + '</p>';
     const suppress = document.getElementById('order_number');        

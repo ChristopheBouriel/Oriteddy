@@ -4,9 +4,19 @@ function getTeddyInfos() {
         addBasket(json);});   
   }
 
-//affichage initial du produit
+class OrderTeddy {
+    constructor (name, color, number, price) {
+        this.name = name;
+        this.color = color;
+        this.number = number;
+        this.price = price;
+    }
+}
+
 let addItems = {};
 let item = 0;
+
+//affichage initial du produit
 function getOneTeddyInfos (infosTeddy) {    
     const teddyView = document.createElement('div');
     teddyView.classList.add('teddy_item_view', 'text-center', 'mt-md-2');
@@ -21,14 +31,13 @@ function getOneTeddyInfos (infosTeddy) {
     const teddyNavButtons = document.getElementById('teddy_view');
     teddyNavButtons.appendChild(teddyViewNav);
     teddyViewNav.innerHTML = '<p><a href="index.html#' + infosTeddy.name + '">'
-     + '<div class="back_to_list"><i class="fas fa-paw"></i><p>Retour</p></div></a></p>';
-
+        + '<div class="back_to_list"><i class="fas fa-paw"></i><p>Retour</p></div></a></p>';
     const initColor = document.getElementById('color_choice');
     initColor.innerHTML = infosTeddy.colors[0];
     addItems[0] = infosTeddy.colors[0];
     const showQuantity = document.getElementById('quantity_choice');
     showQuantity.innerHTML = item;
-    let teddyColors = infosTeddy.colors;
+    const teddyColors = infosTeddy.colors;
     showColors(teddyColors);
 }
 
@@ -93,27 +102,31 @@ function addBasket(infos) {
     const addValidation = document.getElementById('add_basket');
     addValidation.addEventListener('click', function(event) {
         event.preventDefault();
-        if (item!=0) {
-            console.log(addItems);
-            let constObjName = '"name":"' + infos.name + '",';
-            let constObjColor = '"color":"' +  addItems[0] + '",';
-            console.log(constObjColor);
-            let constObjQuty = '"nombre":' + addItems[1] + ',';
-            let constObjPrice = '"price":' + infos.price;
-            let constObj = constObjName + constObjColor + constObjQuty + constObjPrice;
-            console.log(constObj);
-            let grr = localStorage.getItem(idItem);            
-            grr = '{' + constObj +'},' + grr;
-            localStorage.setItem(idItem, grr);
-            console.log(localStorage.getItem(idItem));   
-        }
-        let allArticles = localStorage.getItem('totalArticles');
+        if(item!=0) {
+            const newItemBasket = new OrderTeddy(infos.name, addItems[0], addItems[1], infos.price);
+            let allOfThisItem = localStorage.getItem(idItem);
+            if(allOfThisItem.length == 0) {
+                allOfThisItem = [];
+                console.log(allOfThisItem)
+            }
+            else {
+                allOfThisItem = JSON.parse(allOfThisItem);
+                console.log(allOfThisItem)
+            }
+            allOfThisItem.push(newItemBasket);
+            console.log(allOfThisItem)
+            allOfThisItem = JSON.stringify(allOfThisItem);
+            console.log(allOfThisItem)
+            localStorage.setItem(idItem, allOfThisItem);
+            console.log(JSON.parse(localStorage.getItem(idItem)));
+        };
         
-        allArticles = parseFloat(allArticles);
+        let allArticles = localStorage.getItem('totalArticles');
+        allArticles = parseInt(allArticles);
         if(isNaN(allArticles) === true) {
             allArticles = 0;
         };
-        let adds = addItems[1];            
+        const adds = addItems[1];            
         allArticles = allArticles + adds;            
         localStorage.setItem('totalArticles', allArticles);
         showTotalArticles();
@@ -130,7 +143,7 @@ function showTotalArticles() {
     if(isNaN(checkBasket) === true) {
         checkBasket = 0;
     };
-    checkBasket = parseFloat(checkBasket);
+    checkBasket = parseInt(checkBasket);
     console.log(checkBasket);
     if(checkBasket != 0) {
         totalArticles.innerHTML = localStorage.getItem('totalArticles');
@@ -144,13 +157,13 @@ function showTotalArticles() {
 }
 
 function convertCents(priceCent) {
-    let priceEuro = priceCent/100;
+    const priceEuro = priceCent/100;
     return priceEuro;
 }
 
-let model = window.location.search;
-let idItem = model.substring(1);
-let urlApiTeddy = 'http://localhost:3000/api/teddies/' + idItem;
+const model = window.location.search;
+const idItem = model.substring(1);
+const urlApiTeddy = 'http://localhost:3000/api/teddies/' + idItem;
 console.log (urlApiTeddy);
 showTotalArticles();
 getTeddyInfos();
