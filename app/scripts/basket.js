@@ -19,38 +19,30 @@ getAllTeddiesInfos();
 function makeIdTab(infos) {
     let idItem;
     for (let teddy of infos) {
-        console.log(teddy);
         idItem = teddy._id;
         idItemsTab.push(idItem);
-        console.log(idItemsTab);
-    };
-    
+    };    
     getBasicListFromStorage(idItemsTab); 
 }
 
 //récupération de la liste brute des articles du panier pour chaque modèle
 function getBasicListFromStorage(idItemsTab) {
-    console.log(colorNumberTableAll);
     //possible de déclarer colorNumberTableAll ici et le passer en paramètre à makeListByColorItem(), removeTeddyColorAll(), removeOneItem(), addOneItem();
-    
     let totalTeddyList = [];
     let itemsTab;
     for (let idItem of idItemsTab) {
         itemsTab = localStorage.getItem(idItem);    
         if(itemsTab.length != 0) {
-            totalTeddyList = JSON.parse(itemsTab);
-            console.log(totalTeddyList);    
+            totalTeddyList = JSON.parse(itemsTab);   
             makeListByColorItem(totalTeddyList, idItem);
-        }
-        console.log(itemsTab);  
+        }; 
     };
     makeTotal();
     createTotalLign();
     removeTeddyColorAll();
     removeOneItem();
     addOneItem();
-    resetBasket();    
-    console.log(colorNumberTableAll);
+    resetBasket();
 } 
 
 //constitution de la liste des articles sans répétition de modèles d'une même couleur (contrôle)
@@ -62,7 +54,6 @@ function makeListByColorItem(totalTeddyList, idItem) {
     for (let readNumberEachColor of totalTeddyList) {            
         if (totalTeddyList != []) {        
             countInfos = Object.values(readNumberEachColor);
-            console.log(countInfos);
             numberEachColor = countInfos[2];
             teddyColor = countInfos[1];
             teddyPrice = countInfos[3];
@@ -88,12 +79,10 @@ function makeListByColorItem(totalTeddyList, idItem) {
                             z[1] = z[1] + numberEachColor;   
                         };         
                     };      
-                };
-           console.log(colorNumberTable);           
+                };           
         };        
     };
     colorNumberTableAll.push(colorNumberTable);    
-    console.log(colorNumberTableAll);
     showNumberColorEach(colorNumberTable);
     showNumberEach(teddyName, teddyPrice, totalTeddy, idItem);
     makeFinalOrder(colorNumberTable);     
@@ -121,7 +110,6 @@ function showNumberColorEach(colorNumberTable) {
         removeBasket = y[2] + y[0];
         removeBasketTable.push(removeBasket);
     }
-console.log(removeBasketTable);
 };
 
 //affichage initial du total pour chaque modèle et constitution du tableau pour l'envoi à l'API
@@ -137,7 +125,6 @@ function showNumberEach(teddyName, teddyPrice, totalTeddy, idItem) {
     + '<p class="subtotal col-2 text-right">Montant</p></div><div class="row no-gutters make_subtotal">'
     + '<a class="col-7 back_button" href="oribear-item.html?' + idItem + '">Revoir l\'article</a>'
     + '<p class="col-3">' + totalTeddy + '</p><p class="subtotal col-2 text-right">' + convertCents(totalTeddy*teddyPrice) + ' €</p></div></div>';
-
     let totalTeddyFinal = [];
     totalTeddyFinal[0] = teddyName;
     totalTeddyFinal[1] = totalTeddy;
@@ -145,8 +132,7 @@ function showNumberEach(teddyName, teddyPrice, totalTeddy, idItem) {
     totalTeddyFinal[3] = totalTeddy*teddyPrice;
     totalTeddyFinal[4] = idItem;
     totalTeddyItems.push(totalTeddyFinal);    
-    };
-    console.log(totalTeddyItems);     
+    };     
 }
 
 //constitution initiale de la liste de toutes les variantes de teddies, modèle ET couleur
@@ -154,8 +140,7 @@ function makeFinalOrder(colorNumberTable) {
     for (let i of colorNumberTable) {
         if (i[1] != 0) {
         finalOrder.push(i);
-        console.log(finalOrder);
-        }
+        };
     };        
 }
 
@@ -164,8 +149,6 @@ function makeTotal() {
     for (let makeTotal of totalTeddyItems) {
     totalOrder = totalOrder + makeTotal[3];
     totalTeddiesOrder = totalTeddiesOrder + makeTotal[1];
-    console.log(totalTeddiesOrder);
-    console.log(totalOrder);
     };
 }
 
@@ -190,10 +173,10 @@ function showTotal() {
     seeTotalOrder.innerHTML = '<p>Votre panier est vide</p>';
         for(let idItem of idItemsTab) {
             localStorage.setItem(idItem, '');            
-        }
+        };
         const totalArticles = document.getElementById('total_articles');
       totalArticles.innerHTML = '';       
-    }
+    };
     showTotalArticlesMenu();
     resetBasket();   
 }
@@ -202,7 +185,6 @@ function showTotal() {
 function showTotalArticlesMenu() {
     const seeTotalArticles = document.getElementById('total_articles');
     seeTotalArticles.innerHTML = totalTeddiesOrder;
-    console.log(localStorage.getItem('totalArticles'));
     localStorage.setItem('totalArticles', totalTeddiesOrder); 
 }
 
@@ -212,23 +194,19 @@ function removeTeddyColorAll() {
     for (let listenRemoveBasket of removeBasketTable) {                
         less = document.getElementById ('del' + listenRemoveBasket);        
         less.addEventListener('click', function(event) {
-        event.preventDefault();    
-        console.log(listenRemoveBasket);
+        event.preventDefault();
         remove = document.getElementById (listenRemoveBasket);
         deleteItemColor = document.getElementById('see_basket');
         deleteItemColor.removeChild(remove);        
         //identification du modèle d'une couleur supprimé
             for (let modifyNumberEach of finalOrder) {
                 teddyColor = modifyNumberEach[2] + modifyNumberEach[0];                
-                console.log(teddyColor);
                 removeTeddyTotal = modifyNumberEach[1];
         //affichage du nouveau total pour la commande
                 if (listenRemoveBasket == teddyColor) {
                     teddyId = modifyNumberEach[4];
                     totalOrder = totalOrder - modifyNumberEach[1]*modifyNumberEach[3];
-                    console.log(totalOrder);
                     totalTeddiesOrder = totalTeddiesOrder - modifyNumberEach[1];
-                    console.log(totalTeddiesOrder);
                     modifyNumberEach[1] = 0;
                     for (let b of totalTeddyItems) {
                         if ( modifyNumberEach[2] == b[0]) {
@@ -241,17 +219,15 @@ function removeTeddyColorAll() {
                             }
                             else {
                                 modifyLignEach(b, modifyNumberEach[2]);
-                            }                           
-                        }                    
-                    }                                   
-                }    
-            }
-            console.log(finalOrder);
+                            };                          
+                        };                    
+                    };                                  
+                };    
+            };
             newBasket(teddyId);            
             showTotal();            
-            console.log(totalTeddyItems);
-        })
-    }
+        });
+    };
 }
 
 class OrderTeddy {
@@ -271,8 +247,8 @@ function newBasket(teddyId) {
         if (constObjTeddy[1] != 0 && constObjTeddy[4] == teddyId) {
             newItemBasket = new OrderTeddy(constObjTeddy[2], constObjTeddy[0], constObjTeddy[1], constObjTeddy[3]);
             allOfThisItem.push(newItemBasket);
-        }
-    }
+        };
+    };
     allOfThisItem = JSON.stringify(allOfThisItem);
     localStorage.setItem(teddyId, allOfThisItem);
 }
@@ -284,10 +260,10 @@ function resetBasket() {
         resetAll.addEventListener('click', function() {        
         for(let idItem of idItemsTab) {
             localStorage.setItem(idItem, '');            
-        }
+        };
         localStorage.setItem('totalArticles', '');        
-        })
-    }
+        });
+    };
 }
 
 //modification de la ligne concernée par ajout ou suppression
@@ -319,12 +295,9 @@ function removeOneItem() {
         removeOne.addEventListener('click', function(event) {
         event.preventDefault();
         event.stopPropagation();
-        console.log(listenRemoveBasket);
         i = 1;
-            for (let readColorNumberTable of colorNumberTableAll) {
-                console.log(colorNumberTableAll);              
-                for (let readColorNumberEach of readColorNumberTable) {
-                    console.log(readColorNumberEach);                    
+            for (let readColorNumberTable of colorNumberTableAll) {              
+                for (let readColorNumberEach of readColorNumberTable) {                    
                     if (readColorNumberEach[2]+readColorNumberEach[0] == listenRemoveBasket && i == 1 && readColorNumberEach[1] != 0 ) {
                         readColorNumberEach[1] = readColorNumberEach[1] - 1;
                         modifyLignColorEach(readColorNumberEach, listenRemoveBasket);
@@ -335,20 +308,17 @@ function removeOneItem() {
                                 newTotalTeddy[1] = newTotalTeddy[1] - 1;
                                 newTotalTeddy[3] = newTotalTeddy[1]*newTotalTeddy[2];
                                 modifyLignEach(newTotalTeddy, readColorNumberEach[2]);                                
-                            }
-                        }
+                            };
+                        };
                         totalOrder = totalOrder - readColorNumberEach[3];
                         totalTeddiesOrder = totalTeddiesOrder - 1;
-                        console.log(totalTeddiesOrder);
                         showTotal();
-                    }
-                    console.log(totalTeddyItems);
-                    console.log(finalOrder);
-                }                    
-            }
+                    };
+                };                   
+            };
             newBasket(teddyId);
-        })
-    }
+        });
+    };
 }
 
 //détection et traitement du clic sur un bouton +
@@ -359,11 +329,9 @@ function addOneItem() {
         removeOne.addEventListener('click', function(event) {
         event.preventDefault();
         event.stopPropagation();
-        console.log(listenRemoveBasket);
         i = 1;
             for (let readColorNumberTable of colorNumberTableAll) {                
-                for (let readColorNumberEach of readColorNumberTable) {
-                    console.log(readColorNumberEach);                    
+                for (let readColorNumberEach of readColorNumberTable) {                    
                     if (readColorNumberEach[2]+readColorNumberEach[0] == listenRemoveBasket && i == 1) {
                         readColorNumberEach[1] = readColorNumberEach[1] + 1;
                         modifyLignColorEach(readColorNumberEach, listenRemoveBasket);
@@ -374,20 +342,17 @@ function addOneItem() {
                                 newTotalTeddy[1] = newTotalTeddy[1] + 1;
                                 newTotalTeddy[3] = newTotalTeddy[1]*newTotalTeddy[2];
                                 modifyLignEach(newTotalTeddy, readColorNumberEach[2]);
-                            }
-                        }
+                            };
+                        };
                         totalOrder = totalOrder + readColorNumberEach[3];
                         totalTeddiesOrder = totalTeddiesOrder + 1;
-                        console.log(totalTeddiesOrder);
                         showTotal();                        
-                    }
-                    console.log(totalTeddyItems);
-                    console.log(finalOrder);
-                }                    
-            }
+                    };
+                };                    
+            };
             newBasket(teddyId);
-        })
-    }
+        });
+    };
 }
 
 function convertCents(priceCent) {
@@ -420,10 +385,9 @@ function makeContact() {
         const city = $('#city').val();
         const email = $('#email').val();
         const currentUser = new User(firstName, lastName, address, city, email);
-        console.log(currentUser);
         makeIdList(currentUser);
         return false;
-    }   
+    };
 }
 
 //création du tableau des références commandées et stockage du tableau détaillé de la commande pour la page "Commande"
@@ -431,20 +395,17 @@ function makeIdList(currentUser) {
     let idList = [];
     for(let g of totalTeddyItems) {
         idList.push(g[4]);
-    }
-    console.log(idList);
+    };
     localStorage.setItem('orderResume', JSON.stringify(totalTeddyItems)); //pour afficher le résumé dans la confirmation de commande
-    console.log(localStorage.getItem('orderResume'));
     makeBodyPost(currentUser, idList);
 }
 
 //écriture du body de la requête à l'API
 function makeBodyPost(currentUser, idList) {
-    const obj = new Order (currentUser, idList)
-    console.log(obj);
+    const obj = new Order (currentUser, idList);
     if(totalOrder != 0) {
         sendOrder(obj);
-    }
+    };
 }
 
 //envoi de la requête à l'API et récupération de la réponse
@@ -462,22 +423,14 @@ function sendOrder(obj) {
 
 //récupération et stockage des infos nécessaires à la gestion de l'affichage de la page "Commande"
 function prepareConfirmation(confirmedOrder) {
-    console.log(confirmedOrder);
     const infos = Object.values(confirmedOrder);
     const orderNumber = infos[2];
-    console.log(orderNumber);
     localStorage.setItem('idOrder', orderNumber);
-    console.log(localStorage.idOrder);
-    
     localStorage.setItem('isNew', 1);
-    console.log(localStorage.isNew);
-
     const a = Object.values(infos[0]);
     const idUser = a[0] + a[1];
-    console.log(idUser);
     const lastOrder = {"orderId": infos[2], "saveOrder": JSON.parse(localStorage.orderResume)};
     localStorage.setItem(idUser,JSON.stringify(lastOrder));
-    console.log(localStorage.getItem(idUser));
     goToOrder();
 }
 

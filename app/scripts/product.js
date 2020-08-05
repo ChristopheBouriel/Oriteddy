@@ -73,12 +73,10 @@ function addOne() {
         plus.addEventListener('click', function(event) {
         event.preventDefault();       
         item++;      
-        console.log(item);
         const showQuantity = document.getElementById('quantity_choice');
         showQuantity.innerHTML = item;
         addItems[1] = item;
         });
-    console.log(addItems);
 }
 
 //sélection du nombre désiré dans la couleur affichée --> enlever
@@ -87,14 +85,12 @@ function removeOne() {
     less.addEventListener('click', function(event) {
         event.preventDefault();       
         if (item>0) {
-            item--;           
-            console.log(item);
+            item--;
             const showQuantity = document.getElementById('quantity_choice');
             showQuantity.innerHTML = item;
             addItems[1] = item;
             }
-        });
-    console.log(addItems);   
+        });   
 }
 
 //ajouter la sélection au panier
@@ -107,20 +103,14 @@ function addBasket(infos) {
             let allOfThisItem = localStorage.getItem(idItem);
             if(allOfThisItem.length == 0) {
                 allOfThisItem = [];
-                console.log(allOfThisItem)
             }
             else {
                 allOfThisItem = JSON.parse(allOfThisItem);
-                console.log(allOfThisItem)
             }
             allOfThisItem.push(newItemBasket);
-            console.log(allOfThisItem)
             allOfThisItem = JSON.stringify(allOfThisItem);
-            console.log(allOfThisItem)
             localStorage.setItem(idItem, allOfThisItem);
-            console.log(JSON.parse(localStorage.getItem(idItem)));
-        };
-        
+        };        
         let allArticles = localStorage.getItem('totalArticles');
         allArticles = parseInt(allArticles);
         if(isNaN(allArticles) === true) {
@@ -144,15 +134,12 @@ function showTotalArticles() {
         checkBasket = 0;
     };
     checkBasket = parseInt(checkBasket);
-    console.log(checkBasket);
     if(checkBasket != 0) {
         totalArticles.innerHTML = localStorage.getItem('totalArticles');
-        console.log('zut');
     }
     else {
         const totalArticles = document.getElementById('total_articles');
         totalArticles.innerHTML = '';
-        console.log('put');
     }
 }
 
@@ -164,7 +151,6 @@ function convertCents(priceCent) {
 const model = window.location.search;
 const idItem = model.substring(1);
 const urlApiTeddy = 'http://localhost:3000/api/teddies/' + idItem;
-console.log (urlApiTeddy);
 showTotalArticles();
 getTeddyInfos();
 addOne();
