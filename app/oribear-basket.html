@@ -60,24 +60,25 @@
             <div class="col-lg-5 card mx-auto order_infos px-2">
               <p>Veuillez remplir le formulaire puis envoyer pour valider votre commande</p>
               <form id="form_1" onsubmit="return makeContact()" >
+                <p id="form_message">* Tous les champs sont obligatoires, veillez à respecter le format indiqué</p>
                 <div class="form-group">
-                    <label for="firstname">Prenom</label>
-                    <input id="firstname" class="form-control" required type="text" pattern="[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F '-]{2,30}"/>
+                    <label for="firstname">Prénom*</label>
+                    <input id="firstname" class="form-control" required type="text" placeholder="Prénom (30 caractères maximum)" pattern="[A-Z\u00C0-\u00D6\u00D8-\u00DF '-]{1}[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F '-]{2,30}"/>
                 </div>
                 <div class="form-group">
-                    <label for="lastname">Nom</label>
-                    <input id="lastname" class="form-control" required type="text" pattern="[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F '-]{2,40}"/>
+                    <label for="lastname">Nom*</label>
+                    <input id="lastname" class="form-control" required type="text" placeholder="NOM (40 caractères maximum)" pattern="[A-Z\u00C0-\u00D6\u00D8-\u00DF '-]{2,40}"/>
                 </div>
                 <div class="form-group">
-                    <label for="address">Adresse</label>
-                    <input id="address" class="form-control" required type="text" pattern="([0-9]{0,5}[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F,\. '-]{6,100})"/>
+                    <label for="address">Adresse*</label>
+                    <input id="address" class="form-control" required type="text" placeholder="100 caractères maximum" pattern="([0-9]{0,5}[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F,\. '-]{6,100})"/>
                 </div>
                 <div class="form-group">
-                    <label for="city">Ville</label>
-                    <input id="city" class="form-control" required type="text" placeholder="73000 Chambéry" pattern="([0-9]{0,5}[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F '-]{2,40})"/>
+                    <label for="city">Ville*</label>
+                    <input id="city" class="form-control" required type="text" placeholder="73000 Chambéry" pattern="([0-9]{0,5} [a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F '-]{2,40})"/>
                 </div>
                 <div class="form-group">
-                    <label for="email">Adresse email</label>
+                    <label for="email">Adresse email*</label>
                     <input id="email" class="form-control" type="email" name="adresse_mail" required />
                 </div>
                 <div id="validate_button">

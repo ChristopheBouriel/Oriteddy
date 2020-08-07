@@ -1,6 +1,6 @@
 //récupération des infos du teddy
 function getTeddyInfos() {
-    return fetch(urlApiTeddy).then(response => response.json()).then(json => {getOneTeddyInfos(json);
+    return fetch(urlApiTeddy).then(response => response.json()).then(json => {showTeddyInfos(json);
         addBasket(json);});   
   }
 
@@ -17,7 +17,7 @@ let addItems = {};
 let item = 0;
 
 //affichage initial du produit
-function getOneTeddyInfos (infosTeddy) {    
+function showTeddyInfos (infosTeddy) {    
     const teddyView = document.createElement('div');
     teddyView.classList.add('teddy_item_view', 'text-center', 'mt-md-2');
     const teddyInfos = document.getElementById('teddy_view');
@@ -93,7 +93,7 @@ function removeOne() {
         });   
 }
 
-//ajouter la sélection au panier
+//ajouter la sélection au panier et mettre à jour le nombre total d'articles dans le panier
 function addBasket(infos) {
     const addValidation = document.getElementById('add_basket');
     addValidation.addEventListener('click', function(event) {
@@ -110,12 +110,14 @@ function addBasket(infos) {
             allOfThisItem.push(newItemBasket);
             allOfThisItem = JSON.stringify(allOfThisItem);
             localStorage.setItem(idItem, allOfThisItem);
-        };        
+        };
+
         let allArticles = localStorage.getItem('totalArticles');
         allArticles = parseInt(allArticles);
         if(isNaN(allArticles) === true) {
             allArticles = 0;
         };
+
         const adds = addItems[1];            
         allArticles = allArticles + adds;            
         localStorage.setItem('totalArticles', allArticles);
@@ -127,6 +129,7 @@ function addBasket(infos) {
     });
 };
 
+//montrer le nombre total d'articles du panier dans le bouton du menu
 function showTotalArticles() {
     const totalArticles = document.getElementById('total_articles');
     let checkBasket = localStorage.getItem('totalArticles');
@@ -143,6 +146,7 @@ function showTotalArticles() {
     }
 }
 
+//convertion des prix de cent en euro
 function convertCents(priceCent) {
     const priceEuro = priceCent/100;
     return priceEuro;

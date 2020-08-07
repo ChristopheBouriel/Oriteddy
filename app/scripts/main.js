@@ -1,8 +1,9 @@
 
 function getAllTeddiesInfos() {  
-    return fetch('http://localhost:3000/api/teddies').then(response => response.json()).then(json => {readList(json);});  
+    return fetch('http://localhost:3000/api/teddies').then(response => response.json()).then(json => {showList(json);});  
 }
 
+//montrer le nombre total d'articles du panier dans le bouton du menu
 function showTotalArticles() {
     const totalArticles = document.getElementById('total_articles');
     let checkBasket = localStorage.getItem('totalArticles');
@@ -18,13 +19,15 @@ function showTotalArticles() {
       totalArticles.innerHTML = '';
     }
 }
-  
+
+//convertion des prix de cent en euro
 function convertCents(priceCent) {
     const priceEuro = priceCent/100;
     return priceEuro;
 }
 
-function readList(list) {
+//Affichage de la liste complète des teddies
+function showList(list) {
     let teddyList, testId, newTeddy;
     for (let teddy of list) {
         newTeddy = document.createElement('div');

@@ -45,7 +45,7 @@ function getBasicListFromStorage(idItemsTab) {
     resetBasket();
 } 
 
-//constitution de la liste des articles sans répétition de modèles d'une même couleur (contrôle)
+//constitution de la liste des articles sans répétition de modèles d'une même couleur
 function makeListByColorItem(totalTeddyList, idItem) {
     let totalTeddy = 0;
     const colorNumberTable = [];
@@ -144,7 +144,7 @@ function makeFinalOrder(colorNumberTable) {
     };        
 }
 
-//calcul initial du total de la commande (contrôle)
+//calcul initial du total de la commande
 function makeTotal() {
     for (let makeTotal of totalTeddyItems) {
     totalOrder = totalOrder + makeTotal[3];
@@ -162,7 +162,7 @@ function createTotalLign() {
     showTotal();
 }
 
-//affichage du total de la commande (vue)
+//affichage du total de la commande
 function showTotal() {
     const seeTotalOrder = document.getElementById('total_order');
     if (totalOrder != 0) {    
@@ -177,18 +177,36 @@ function showTotal() {
         const totalArticles = document.getElementById('total_articles');
       totalArticles.innerHTML = '';       
     };
-    showTotalArticlesMenu();
+    localStorage.setItem('totalArticles', totalTeddiesOrder); 
+    showTotalArticles();
     resetBasket();   
 }
 
 //affichage du nombre total d'article dans le bouton du menu
-function showTotalArticlesMenu() {
-    const seeTotalArticles = document.getElementById('total_articles');
-    seeTotalArticles.innerHTML = totalTeddiesOrder;
-    localStorage.setItem('totalArticles', totalTeddiesOrder); 
+//function showTotalArticlesMenu() {
+//    const seeTotalArticles = document.getElementById('total_articles');
+//    seeTotalArticles.innerHTML = totalTeddiesOrder;
+//    localStorage.setItem('totalArticles', totalTeddiesOrder); 
+//}
+
+function showTotalArticles() {
+    const totalArticles = document.getElementById('total_articles');
+    let checkBasket = localStorage.getItem('totalArticles');
+    if(isNaN(checkBasket) === true) {
+      checkBasket = 0;
+    };
+    checkBasket = parseInt(checkBasket);
+    if(checkBasket != 0) {
+      totalArticles.innerHTML = localStorage.getItem('totalArticles');
+    }
+    else {
+      const totalArticles = document.getElementById('total_articles');
+      totalArticles.innerHTML = '';
+    }
 }
 
-//suppression du modèle d'une certaine couleur à l'affichage (vue)
+
+//suppression du modèle d'une certaine couleur à l'affichage
 function removeTeddyColorAll() {
     let less, remove, deleteItemColor, teddyColor, removeTeddyTotal, teddyId, changeTotalItem, deleteItem;
     for (let listenRemoveBasket of removeBasketTable) {                
@@ -355,6 +373,7 @@ function addOneItem() {
     };
 }
 
+//convertion des prix de cent en euro
 function convertCents(priceCent) {
     const priceEuro = priceCent/100;
     return priceEuro;
