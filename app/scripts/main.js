@@ -1,4 +1,4 @@
-
+//récupération des infos des teddies auprès de l'API
 function getAllTeddiesInfos() {  
     return fetch('http://localhost:3000/api/teddies').then(response => response.json()).then(json => {showList(json);});  
 }

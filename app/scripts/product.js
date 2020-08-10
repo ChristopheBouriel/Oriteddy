@@ -1,4 +1,4 @@
-//récupération des infos du teddy
+//récupération des infos du teddy auprès de l'API
 function getTeddyInfos() {
     return fetch(urlApiTeddy).then(response => response.json()).then(json => {showTeddyInfos(json);
         addBasket(json);});   

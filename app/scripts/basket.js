@@ -1,3 +1,4 @@
+//récupération des infos des teddies auprès de l'API
 function getAllTeddiesInfos() {  
     return fetch('http://localhost:3000/api/teddies').then(response => response.json()).then(json => {makeIdTab(json);});  
 }
@@ -12,6 +13,31 @@ const colorNumberTableAll = []; //tableau de tableaux de chaque teddy, chacun co
 const totalTeddyItems = []; //tableau des différents modèles avec notamment le nombre total de chaque, toutes couleurs confondues
 const finalOrder = []; //tableau simple de toutes les variantes de teddies, modèle ET couleur,
                     // afin de gérer simplement la supression totale d'une variante et la réécriture du panier
+
+class OrderTeddy {
+    constructor (name, color, number, price) {
+        this.name = name;
+        this.color = color;
+        this.number = number;
+        this.price = price;
+    }
+}
+
+class User {
+    constructor(firstName, lastName, address, city, email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.email = email;
+    }
+}
+class Order {
+    constructor(user, orderList) {
+        this.contact = user;
+        this.products = orderList;
+    }
+}
 
 getAllTeddiesInfos();
 
@@ -182,13 +208,7 @@ function showTotal() {
     resetBasket();   
 }
 
-//affichage du nombre total d'article dans le bouton du menu
-//function showTotalArticlesMenu() {
-//    const seeTotalArticles = document.getElementById('total_articles');
-//    seeTotalArticles.innerHTML = totalTeddiesOrder;
-//    localStorage.setItem('totalArticles', totalTeddiesOrder); 
-//}
-
+//montrer le nombre total d'articles du panier dans le bouton du menu
 function showTotalArticles() {
     const totalArticles = document.getElementById('total_articles');
     let checkBasket = localStorage.getItem('totalArticles');
@@ -205,8 +225,7 @@ function showTotalArticles() {
     }
 }
 
-
-//suppression du modèle d'une certaine couleur à l'affichage
+//suppression d'un modèle d'une certaine couleur
 function removeTeddyColorAll() {
     let less, remove, deleteItemColor, teddyColor, removeTeddyTotal, teddyId, changeTotalItem, deleteItem;
     for (let listenRemoveBasket of removeBasketTable) {                
@@ -246,15 +265,6 @@ function removeTeddyColorAll() {
             showTotal();            
         });
     };
-}
-
-class OrderTeddy {
-    constructor (name, color, number, price) {
-        this.name = name;
-        this.color = color;
-        this.number = number;
-        this.price = price;
-    }
 }
 
 //modification du panier en cas de retour à l'accueil et aux pages produit et commande
@@ -379,22 +389,6 @@ function convertCents(priceCent) {
     return priceEuro;
 }
 
-class User {
-    constructor(firstName, lastName, address, city, email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.email = email;
-    }
-}
-class Order {
-    constructor(user, orderList) {
-        this.contact = user;
-        this.products = orderList;
-    }
-}
-
 //création de l'objet "contact"
 function makeContact() {
     if(totalOrder != 0) {
@@ -409,7 +403,7 @@ function makeContact() {
     };
 }
 
-//création du tableau des références commandées et stockage du tableau détaillé de la commande pour la page "Commande"
+//création du tableau des références commandées et stockage du tableau de la commande pour la page "Commande"
 function makeIdList(currentUser) {
     let idList = [];
     for(let g of totalTeddyItems) {
@@ -448,7 +442,7 @@ function prepareConfirmation(confirmedOrder) {
     localStorage.setItem('isNew', 1);
     const a = Object.values(infos[0]);
     const idUser = a[0] + a[1];
-    const lastOrder = {"orderId": infos[2], "saveOrder": JSON.parse(localStorage.orderResume)};
+    const lastOrder = {'orderId': infos[2], 'saveOrder': JSON.parse(localStorage.orderResume)};
     localStorage.setItem(idUser,JSON.stringify(lastOrder));
     goToOrder();
 }
