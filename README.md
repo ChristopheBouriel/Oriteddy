@@ -22,7 +22,7 @@ To get it working on your computer, follow these steps :
 Since I used Yeoman and its workflow which comes with gulp as a task runner, among other things we have a local web server with a fast live reload, and the command above call "gulp serve" to launch this one.  
 A new tab will automatically open in your browser, or you can find it at localhost:9000
 
-![Product page](./app/images/oriteddy_product.png)![Basket page](./app/images/oriteddy_basket_3.png)
+![Product page](./app/images/oriteddy_montage.png)
 
 ## The back-end
 
