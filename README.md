@@ -1,5 +1,9 @@
 # About :
-## The front-end (this repository)
+* [The front-end (this repository)](#the-front-end)
+* [The back-end](#the-back-end)
+* [The project](#the-project)
+
+## The front-end
 
 To get it working on your computer, follow these steps :
 
@@ -31,8 +35,7 @@ You just need to change `http://localhost:3000` for `https://orinoco-back-end.he
 following files : main.js, product.js and basket.js  
 You'll find them in the "scripts" folder inside the "app" folder
 
-
-# More informations
+## The project
 
 You can get more details about this project in my portfolio :  
 https://portfolio-christophe-bouriel.netlify.app  
