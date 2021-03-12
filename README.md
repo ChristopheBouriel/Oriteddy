@@ -26,7 +26,7 @@ A new tab will automatically open in your browser, or you can find it at localho
 
 ## The back-end
 
-The back-end has been provided by Openclassrooms as part of a project for the Junior Web Develepper training.  
+The back-end has been provided by Openclassrooms as part of a project for my Junior Web Develepper training.  
 You can find the Github repository by following this link :  
 https://github.com/OpenClassrooms-Student-Center/JWDP5
 
@@ -37,6 +37,7 @@ You'll find them in the "scripts" folder inside the "app" folder
 
 ## The project
 
+As part of my Junior Web Develepper training, I had to make the front-end for an e-shopping site, without using any JavaScript framework. 
 You can get more details about this project in my portfolio :  
 https://portfolio-christophe-bouriel.netlify.app  
 By the way, the whole site has also been deployed and you can find it on Internet :  
